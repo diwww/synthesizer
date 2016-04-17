@@ -187,6 +187,21 @@ namespace SoundGenerator
             {
                 timer1.Enabled = false;
             }
+            label12.Text = buffer.Volume.ToString() + " " + k.ToString();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (k % 2 == 1)
+            {
+                buffer.Volume = (int)Volume.Max;
+                timer1.Enabled = false;
+            }
+            else
+            {
+                timer1.Enabled = true;
+            }
+            k++;
         }
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
