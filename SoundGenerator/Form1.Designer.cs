@@ -449,7 +449,7 @@
             // 
             // timer2
             // 
-            this.timer2.Interval = 120;
+            this.timer2.Interval = 90;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // arp_checkBox

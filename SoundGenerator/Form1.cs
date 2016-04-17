@@ -265,10 +265,13 @@ namespace SoundGenerator
         // Play note for the corresponding key
         private void PlayNote(KeyEventArgs e)
         {
-            if (arpFlag)
-                PlayArp();
-            if (k == 0)
-                timer1.Enabled = false;
+            if (pressedKeys.Count > 0)
+            {
+                if (arpFlag)
+                    PlayArp();
+                if (k == 0)
+                    timer1.Enabled = false;
+            }
 
             switch (e.KeyData)
             {
