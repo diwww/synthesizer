@@ -98,6 +98,7 @@ namespace SoundGenerator
             try
             {
                 PlayNote(e);
+                label12.Text = buffer.Volume.ToString() + " " + k.ToString();
             }
             catch (NullReferenceException)
             { }
@@ -208,6 +209,11 @@ namespace SoundGenerator
             GenerateWave();
         }
 
+        private void arp_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            arpFlag = arp_checkBox.Checked;
+        }
+
         #endregion Event handlers
 
         #region Methods
@@ -236,7 +242,7 @@ namespace SoundGenerator
             if (f && (Array.BinarySearch<Keys>(synthKeys, e.KeyData) >= 0))
             {
                 pressedKeys.Add(e.KeyData);
-                if (!arpFlag)
+                if (k == 0)
                     buffer.Volume = (int)Volume.Max;
             }
         }
@@ -246,7 +252,7 @@ namespace SoundGenerator
         {
             if (arpFlag)
                 PlayArp();
-            else
+            if (k == 0)
                 timer1.Enabled = false;
 
             switch (e.KeyData)
@@ -378,19 +384,6 @@ namespace SoundGenerator
         #endregion Methods
 
         #region Trash
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            if (k % 2 == 0)
-            {
-                timer1.Enabled = false;
-                buffer.Volume = (int)Volume.Max;
-            }
-            else
-            {
-                timer1.Enabled = true;
-            }
-            k++;
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -400,11 +393,6 @@ namespace SoundGenerator
         }
 
         #endregion Trash
-
-        private void arp_checkBox_CheckedChanged(object sender, EventArgs e)
-        {
-            arpFlag = arp_checkBox.Checked;
-        }
     }
 }
 
