@@ -62,7 +62,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
+            this.arp_checkBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
@@ -438,25 +438,25 @@
             // 
             // timer2
             // 
-            this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // button2
+            // arp_checkBox
             // 
-            this.button2.Location = new System.Drawing.Point(336, 159);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.arp_checkBox.AutoSize = true;
+            this.arp_checkBox.Location = new System.Drawing.Point(383, 99);
+            this.arp_checkBox.Name = "arp_checkBox";
+            this.arp_checkBox.Size = new System.Drawing.Size(80, 17);
+            this.arp_checkBox.TabIndex = 30;
+            this.arp_checkBox.Text = "Arpeggiator";
+            this.arp_checkBox.UseVisualStyleBackColor = true;
+            this.arp_checkBox.CheckedChanged += new System.EventHandler(this.arp_checkBox_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 460);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.arp_checkBox);
             this.Controls.Add(this.domainUpDown1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -530,7 +530,7 @@
         private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox arp_checkBox;
     }
 }
 
