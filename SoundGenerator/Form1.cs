@@ -17,16 +17,18 @@ namespace SoundGenerator
         Oscillator osc1, osc2, osc3;
         public short[] waveData;
         int octave;
+        int k = 0; // Arpeggiator status
 
         // DirectSound variables
         SecondaryBuffer buffer;
         // Flags
         public bool openFlag = false;
+        bool arpFlag = false;
         // Second form
         Form2 f2;
         // Keys collections
         BindingList<Keys> pressedKeys;
-        Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7, Keys.Z };
+        Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
         // File dialogs
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
@@ -66,6 +68,7 @@ namespace SoundGenerator
                 buffer = Methods.InitializeBuffer(this.Handle);
                 GenerateWave();
                 buffer.Volume = (int)Volume.Min;
+                buffer.Frequency = Methods.NoteFreq(8, 1);
                 buffer.Play(0, BufferPlayFlags.Looping);
             }
             catch (Exception exc)
@@ -95,6 +98,7 @@ namespace SoundGenerator
             try
             {
                 PlayNote(e);
+                label12.Text = buffer.Volume.ToString() + " " + k.ToString();
             }
             catch (NullReferenceException)
             { }
@@ -183,6 +187,21 @@ namespace SoundGenerator
             {
                 timer1.Enabled = false;
             }
+            label12.Text = buffer.Volume.ToString() + " " + k.ToString();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (k % 2 == 1)
+            {
+                buffer.Volume = (int)Volume.Max;
+                timer1.Enabled = false;
+            }
+            else
+            {
+                timer1.Enabled = true;
+            }
+            k++;
         }
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
@@ -203,6 +222,11 @@ namespace SoundGenerator
         private void amp1_MouseUp(object sender, MouseEventArgs e)
         {
             GenerateWave();
+        }
+
+        private void arp_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            arpFlag = arp_checkBox.Checked;
         }
 
         #endregion Event handlers
@@ -233,14 +257,22 @@ namespace SoundGenerator
             if (f && (Array.BinarySearch<Keys>(synthKeys, e.KeyData) >= 0))
             {
                 pressedKeys.Add(e.KeyData);
-                buffer.Volume = (int)Volume.Max;
+                if (k == 0)
+                    buffer.Volume = (int)Volume.Max;
             }
         }
 
         // Play note for the corresponding key
         private void PlayNote(KeyEventArgs e)
         {
-            timer1.Enabled = false;
+            if (pressedKeys.Count > 0)
+            {
+                if (arpFlag)
+                    PlayArp();
+                if (k == 0)
+                    timer1.Enabled = false;
+            }
+
             switch (e.KeyData)
             {
                 case Keys.Q:
@@ -296,6 +328,17 @@ namespace SoundGenerator
             }
         }
 
+        private void PlayArp()
+        {
+            timer2.Enabled = true;
+        }
+
+        private void StopArp()
+        {
+            timer2.Enabled = false;
+            k = 0;
+        }
+
         // Remove unpressed keys from list,
         // stop playback, if pressedKeys.Count < 1
         private void StopPlayback(KeyEventArgs e)
@@ -314,6 +357,7 @@ namespace SoundGenerator
             {
                 try
                 {
+                    StopArp();
                     timer1.Enabled = true;
                     pictureBox1.Image = Properties.Resources._0;
                 }
@@ -357,25 +401,6 @@ namespace SoundGenerator
         #endregion Methods
 
         #region Trash
-
-        KeyEventArgs c = new KeyEventArgs(Keys.Z);
-        int k = 0;
-        // Потом удалить Z из массива клавиш
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            Form1_KeyDown(this, c);
-            //if (k % 2 == 1)
-            //{
-            //    return;
-            //}
-            Form1_KeyUp(this, c);
-            k++;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            timer2.Enabled = !timer2.Enabled;
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {

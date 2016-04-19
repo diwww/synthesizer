@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -62,7 +63,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
+            this.arp_checkBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
@@ -77,6 +78,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.comboBox1);
@@ -89,6 +91,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 141);
             this.panel1.TabIndex = 10;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(187, 13);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "label12";
             // 
             // button1
             // 
@@ -438,25 +449,25 @@
             // 
             // timer2
             // 
-            this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // button2
+            // arp_checkBox
             // 
-            this.button2.Location = new System.Drawing.Point(336, 159);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.arp_checkBox.AutoSize = true;
+            this.arp_checkBox.Location = new System.Drawing.Point(383, 99);
+            this.arp_checkBox.Name = "arp_checkBox";
+            this.arp_checkBox.Size = new System.Drawing.Size(80, 17);
+            this.arp_checkBox.TabIndex = 30;
+            this.arp_checkBox.Text = "Arpeggiator";
+            this.arp_checkBox.UseVisualStyleBackColor = true;
+            this.arp_checkBox.CheckedChanged += new System.EventHandler(this.arp_checkBox_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 460);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.arp_checkBox);
             this.Controls.Add(this.domainUpDown1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -530,7 +541,8 @@
         private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox arp_checkBox;
+        private System.Windows.Forms.Label label12;
     }
 }
 
