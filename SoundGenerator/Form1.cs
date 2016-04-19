@@ -357,8 +357,7 @@ namespace SoundGenerator
             {
                 try
                 {
-                    if (arpFlag)
-                        StopArp();
+                    StopArp();
                     timer1.Enabled = true;
                     pictureBox1.Image = Properties.Resources._0;
                 }
