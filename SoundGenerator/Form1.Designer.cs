@@ -64,6 +64,8 @@
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.arp_checkBox = new System.Windows.Forms.CheckBox();
+            this.reverb_checkBox = new System.Windows.Forms.CheckBox();
+            this.dist_checkBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
@@ -363,9 +365,9 @@
             // 
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(336, 123);
+            this.listBox1.Location = new System.Drawing.Point(336, 175);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(122, 91);
+            this.listBox1.Size = new System.Drawing.Size(122, 39);
             this.listBox1.TabIndex = 22;
             this.listBox1.TabStop = false;
             // 
@@ -462,11 +464,35 @@
             this.arp_checkBox.UseVisualStyleBackColor = true;
             this.arp_checkBox.CheckedChanged += new System.EventHandler(this.arp_checkBox_CheckedChanged);
             // 
+            // reverb_checkBox
+            // 
+            this.reverb_checkBox.AutoSize = true;
+            this.reverb_checkBox.Location = new System.Drawing.Point(336, 125);
+            this.reverb_checkBox.Name = "reverb_checkBox";
+            this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
+            this.reverb_checkBox.TabIndex = 31;
+            this.reverb_checkBox.Text = "Reverb";
+            this.reverb_checkBox.UseVisualStyleBackColor = true;
+            this.reverb_checkBox.CheckedChanged += new System.EventHandler(this.effects_CheckedChanged);
+            // 
+            // dist_checkBox
+            // 
+            this.dist_checkBox.AutoSize = true;
+            this.dist_checkBox.Location = new System.Drawing.Point(336, 150);
+            this.dist_checkBox.Name = "dist_checkBox";
+            this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
+            this.dist_checkBox.TabIndex = 32;
+            this.dist_checkBox.Text = "Distortion";
+            this.dist_checkBox.UseVisualStyleBackColor = true;
+            this.dist_checkBox.CheckedChanged += new System.EventHandler(this.effects_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 460);
+            this.Controls.Add(this.dist_checkBox);
+            this.Controls.Add(this.reverb_checkBox);
             this.Controls.Add(this.arp_checkBox);
             this.Controls.Add(this.domainUpDown1);
             this.Controls.Add(this.label11);
@@ -543,6 +569,8 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.CheckBox arp_checkBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox reverb_checkBox;
+        private System.Windows.Forms.CheckBox dist_checkBox;
     }
 }
 

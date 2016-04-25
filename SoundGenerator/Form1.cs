@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace SoundGenerator
 {
@@ -20,12 +21,13 @@ namespace SoundGenerator
         int k = 0; // Arpeggiator status
 
         // DirectSound variables
-        SecondaryBuffer buffer;
+        public SecondaryBuffer buffer;
         // Flags
-        public bool openFlag = false;
+        public bool openFlag_gr = false;
         bool arpFlag = false;
-        // Second form
+        // Additional forms
         Form2 f2;
+        Form3 f3;
         // Keys collections
         BindingList<Keys> pressedKeys;
         Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
@@ -83,7 +85,7 @@ namespace SoundGenerator
         {
             // Disable form cloning
             // and show graph
-            if (openFlag == false)
+            if (openFlag_gr == false)
             {
                 f2 = new Form2(this);
                 f2.Show();
@@ -410,12 +412,54 @@ namespace SoundGenerator
         }
 
         #endregion Trash
+
+        private void effects_CheckedChanged(object sender, EventArgs e)
+        {
+            List<EffectDescription> effects = new List<EffectDescription>();
+            if (reverb_checkBox.Checked)
+            {
+                EffectDescription reverb = new EffectDescription { GuidEffectClass = DSoundHelper.StandardWavesReverbGuid };
+                effects.Add(reverb);
+            }
+            if (dist_checkBox.Checked)
+            {
+                EffectDescription dist = new EffectDescription { GuidEffectClass = DSoundHelper.StandardDistortionGuid };
+                effects.Add(dist);
+            }
+
+            buffer.Stop();
+            if (effects.Count > 0)
+                buffer.SetEffects(effects.ToArray());
+            else
+                buffer.SetEffects(null);
+            buffer.Play(0, BufferPlayFlags.Looping);
+        }
+
+
+
     }
 }
 
-//// Write to buffer and reset
-//// buffer before playback
-//buffer.Write(0, waveData, LockFlag.EntireBuffer);
-//buffer.Stop();
-//buffer.Volume = (int)Volume.Min;
-//buffer.Play(0, BufferPlayFlags.Looping);
+//public bool openFlag_fx = false;
+
+
+//private void fx_checkBox_CheckedChanged(object sender, EventArgs e)
+//{
+//    if (fx_checkBox.Checked)
+//    {
+//        if (openFlag_fx == false)
+//        {
+//            f3 = new Form3(this);
+//            f3.Show();
+//        }
+//        f3.Refresh();
+//        f3.BringToFront();
+//    }
+//    else
+//    {
+//        buffer.Stop();
+//        buffer.SetEffects(null);
+//        buffer.Play(0, BufferPlayFlags.Looping);
+//        f3.Close();
+//    }
+//}

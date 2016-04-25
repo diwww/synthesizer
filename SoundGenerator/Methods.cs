@@ -34,6 +34,7 @@ namespace SoundGenerator
                 bufferDuration * waveFormat.AverageBytesPerSecond / waveFormat.Channels);
             bufferDesc.ControlFrequency = true;
             bufferDesc.ControlVolume = true;
+            bufferDesc.ControlEffects = true;
 
             SecondaryBuffer buffer = new SecondaryBuffer(bufferDesc, device);
             return buffer;

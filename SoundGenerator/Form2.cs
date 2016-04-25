@@ -18,7 +18,7 @@ namespace SoundGenerator
         {
             this.BackColor = Color.DimGray;
             mainForm = form;
-            form.openFlag = true;
+            form.openFlag_gr = true;
             //chart1.AntiAliasing = AntiAliasingStyles.Graphics;
             chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
             chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.False;
@@ -35,7 +35,7 @@ namespace SoundGenerator
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainForm.openFlag = false;
+            mainForm.openFlag_gr = false;
         }
 
         private void ShowTable()
