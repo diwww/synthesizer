@@ -6,6 +6,9 @@ using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
 using System.Collections.Generic;
+using CSCore.SoundIn;
+using CSCore.Codecs.WAV;
+
 
 namespace SoundGenerator
 {
@@ -435,10 +438,73 @@ namespace SoundGenerator
             buffer.Play(0, BufferPlayFlags.Looping);
         }
 
+        private void distFreq_Scroll(object sender, EventArgs e)
+        {
+            DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
+
+            EffectsDistortion settings = effect.AllParameters;
+
+            settings.Edge = distEdge.Value;
+            settings.Gain = distGain.Value;
+            settings.PostEqBandwidth = distBand.Value;
+            settings.PostEqCenterFrequency = distFreq.Value;
+            settings.PreLowpassCutoff = distCutoff.Value;
+
+            effect.AllParameters = settings;
+        }
 
 
+        WasapiCapture capture;
+        WaveWriter waveWriter;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            capture = new WasapiLoopbackCapture();
+            //if nessesary, you can choose a device here
+            //to do so, simply set the device property of the capture to any MMDevice
+            //to choose a device, take a look at the sample here: http://cscore.codeplex.com/
+
+            //initialize the selected device for recording
+            capture.Initialize();
+
+            //create a wavewriter to write the data to
+            
+            waveWriter = new WaveWriter("dump.wav", capture.WaveFormat);
+            
+            //setup an eventhandler to receive the recorded data
+            capture.DataAvailable += (s, c) =>
+            {
+                //save the recorded audio
+                waveWriter.Write(c.Data, c.Offset, c.ByteCount);
+            };
+
+            //start recording
+            capture.Start();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (capture != null)
+            {
+                capture.Stop();
+                capture.Dispose();
+            }
+            if (waveWriter != null)
+            {
+                waveWriter.Dispose();
+            }
+        }
     }
 }
+//capBuffer = Methods.CaptureBufferInit();
+//capBuffer.Start(true);
+//MessageBox.Show(capBuffer.Capturing.ToString(
+
+//capBuffer.Stop();
+//MessageBox.Show(capBuffer.Capturing.ToString());
+//short[] data = (short[])capBuffer.Read(0, typeof(short), LockFlag.None, 0)
+//buffer.Write(0, data, LockFlag.EntireBuffer);
+
+
 
 //public bool openFlag_fx = false;
 

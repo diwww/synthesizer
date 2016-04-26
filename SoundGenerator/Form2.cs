@@ -21,9 +21,9 @@ namespace SoundGenerator
             form.openFlag_gr = true;
             //chart1.AntiAliasing = AntiAliasingStyles.Graphics;
             chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
-            chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.False;
+            //chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.False;
             //chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
             chart1.ChartAreas[0].BackColor = Color.DimGray;
             chart1.BackColor = Color.DimGray;
         }

@@ -13,7 +13,8 @@ namespace Synthesizer
         int amplitude;
         double frequency;
         int samplesPerPeriod;
-        double period;
+        double period; // Sine, Square
+        short step; // Saw, Triangle
         short[] data;
 
         #endregion Variables
@@ -36,6 +37,7 @@ namespace Synthesizer
             frequency = freq;
             samplesPerPeriod = Convert.ToInt32(Constants.samplesPerSec / (frequency / Constants.channels));
             period = (Math.PI * 2 * frequency) / (Constants.samplesPerSec * Constants.channels);
+            step = Convert.ToInt16((amplitude * 2) / samplesPerPeriod);
             data = new short[Constants.samplesAmount];
             NewWave(type);
         }
@@ -58,7 +60,6 @@ namespace Synthesizer
 
         private void Saw()
         {
-            short step = Convert.ToInt16((amplitude * 2) / samplesPerPeriod);
             short tempSample = 0;
             int totalSamplesWritten = 0;
             while (totalSamplesWritten < Constants.samplesAmount)
@@ -73,17 +74,19 @@ namespace Synthesizer
             }
         }
 
-        // UNSTABLE SOUND
         private void Triangle()
         {
-            short step = Convert.ToInt16((amplitude * 2) / samplesPerPeriod);
-            short tempSample = (short)-amplitude;
-            for (int i = 1; i < Constants.samplesAmount; i++)
+            short tempSample = 0;
+            int totalSamplesWritten = 0;
+            while (totalSamplesWritten < Constants.samplesAmount)
             {
-                if (Math.Abs(tempSample) > amplitude)
-                    step = (short)-step;
-                tempSample += step;
-                data[i] = tempSample;
+                tempSample = (short)-amplitude;
+                for (int i = 0; (i < samplesPerPeriod) && (totalSamplesWritten < Constants.samplesAmount); i++)
+                {
+                    tempSample += step;
+                    data[totalSamplesWritten] = (short)(2  * Math.Abs(tempSample) - amplitude);  // The only difference from Saw
+                    totalSamplesWritten++;
+                }
             }
         }
 
@@ -112,3 +115,16 @@ namespace Synthesizer
         #endregion Methods
     }
 }
+//// UNSTABLE SOUND AND EXCEPTION
+//private void Triangle()
+//{
+//    short step = Convert.ToInt16((amplitude * 2) / samplesPerPeriod);
+//    short tempSample = (short)-amplitude;
+//    for (int i = 1; i < Constants.samplesAmount; i++)
+//    {
+//        if (Math.Abs(tempSample) > amplitude)
+//            step = (short)-step;
+//        tempSample += step;
+//        data[i] = tempSample;
+//    }
+//}
