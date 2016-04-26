@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace SoundGenerator
 {
@@ -20,11 +21,12 @@ namespace SoundGenerator
         int k = 0; // Arpeggiator status
 
         // DirectSound variables
-        SecondaryBuffer buffer;
+        public SecondaryBuffer buffer;
         // Flags
-        public bool openFlag = false;
+        public bool openFlag_gr = false;
         bool arpFlag = false;
-        // Second form
+        bool recordFlag = false;
+        // Additional forms
         Form2 f2;
         // Keys collections
         BindingList<Keys> pressedKeys;
@@ -33,15 +35,14 @@ namespace SoundGenerator
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         string path;
+        WavFileRecorder recorder;
 
         #endregion Variables
 
         # region Event handlers
-
         private void Form1_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-
             ofd.Filter = "Synth presets|*.sp";
             sfd.Filter = "Synth presets|*.sp";
             pictureBox1.Image = Properties.Resources._0;
@@ -83,7 +84,7 @@ namespace SoundGenerator
         {
             // Disable form cloning
             // and show graph
-            if (openFlag == false)
+            if (openFlag_gr == false)
             {
                 f2 = new Form2(this);
                 f2.Show();
@@ -410,12 +411,107 @@ namespace SoundGenerator
         }
 
         #endregion Trash
+
+        private void effects_CheckedChanged(object sender, EventArgs e)
+        {
+            List<EffectDescription> effects = new List<EffectDescription>();
+            if (reverb_checkBox.Checked)
+            {
+                EffectDescription reverb = new EffectDescription { GuidEffectClass = DSoundHelper.StandardWavesReverbGuid };
+                effects.Add(reverb);
+            }
+            if (dist_checkBox.Checked)
+            {
+                EffectDescription dist = new EffectDescription { GuidEffectClass = DSoundHelper.StandardDistortionGuid };
+                effects.Add(dist);
+            }
+
+            buffer.Stop();
+            if (effects.Count > 0)
+                buffer.SetEffects(effects.ToArray());
+            else
+                buffer.SetEffects(null);
+            buffer.Play(0, BufferPlayFlags.Looping);
+        }
+
+        private void distFreq_Scroll(object sender, EventArgs e)
+        {
+            DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
+
+            EffectsDistortion settings = effect.AllParameters;
+
+            settings.Edge = distEdge.Value;
+            settings.Gain = distGain.Value;
+            settings.PostEqBandwidth = distBand.Value;
+            settings.PostEqCenterFrequency = distFreq.Value;
+            settings.PreLowpassCutoff = distCutoff.Value;
+
+            effect.AllParameters = settings;
+        }
+
+        private void recordButton_Click(object sender, EventArgs e)
+        {
+            if (recordFlag == false)
+            {
+                try
+                {
+                    recorder = new WavFileRecorder("new.wav");
+                    recorder.StartRecord();
+                    recordFlag = true;
+                    recordButton.Text = "Recording/Stop";
+                    recordButton.BackColor = Color.Red;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                if (recorder != null)
+                {
+                    recorder.StopRecord();
+                    recorder.Dispose();
+                    recorder = null;
+                    recordFlag = false;
+                    recordButton.Text = "Start Record";
+                    recordButton.BackColor = SystemColors.Control;
+                }
+            }
+        }
     }
 }
+//capBuffer = Methods.CaptureBufferInit();
+//capBuffer.Start(true);
+//MessageBox.Show(capBuffer.Capturing.ToString(
 
-//// Write to buffer and reset
-//// buffer before playback
-//buffer.Write(0, waveData, LockFlag.EntireBuffer);
-//buffer.Stop();
-//buffer.Volume = (int)Volume.Min;
-//buffer.Play(0, BufferPlayFlags.Looping);
+//capBuffer.Stop();
+//MessageBox.Show(capBuffer.Capturing.ToString());
+//short[] data = (short[])capBuffer.Read(0, typeof(short), LockFlag.None, 0)
+//buffer.Write(0, data, LockFlag.EntireBuffer);
+
+
+
+//public bool openFlag_fx = false;
+
+
+//private void fx_checkBox_CheckedChanged(object sender, EventArgs e)
+//{
+//    if (fx_checkBox.Checked)
+//    {
+//        if (openFlag_fx == false)
+//        {
+//            f3 = new Form3(this);
+//            f3.Show();
+//        }
+//        f3.Refresh();
+//        f3.BringToFront();
+//    }
+//    else
+//    {
+//        buffer.Stop();
+//        buffer.SetEffects(null);
+//        buffer.Play(0, BufferPlayFlags.Looping);
+//        f3.Close();
+//    }
+//}

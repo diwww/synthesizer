@@ -64,6 +64,20 @@
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.arp_checkBox = new System.Windows.Forms.CheckBox();
+            this.reverb_checkBox = new System.Windows.Forms.CheckBox();
+            this.dist_checkBox = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.distCutoff = new System.Windows.Forms.TrackBar();
+            this.distFreq = new System.Windows.Forms.TrackBar();
+            this.distBand = new System.Windows.Forms.TrackBar();
+            this.distGain = new System.Windows.Forms.TrackBar();
+            this.distEdge = new System.Windows.Forms.TrackBar();
+            this.recordButton = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
@@ -74,6 +88,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.freq3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distCutoff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distBand)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distGain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distEdge)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -363,9 +383,9 @@
             // 
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(336, 123);
+            this.listBox1.Location = new System.Drawing.Point(336, 175);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(122, 91);
+            this.listBox1.Size = new System.Drawing.Size(122, 39);
             this.listBox1.TabIndex = 22;
             this.listBox1.TabStop = false;
             // 
@@ -462,11 +482,169 @@
             this.arp_checkBox.UseVisualStyleBackColor = true;
             this.arp_checkBox.CheckedChanged += new System.EventHandler(this.arp_checkBox_CheckedChanged);
             // 
+            // reverb_checkBox
+            // 
+            this.reverb_checkBox.AutoSize = true;
+            this.reverb_checkBox.Location = new System.Drawing.Point(336, 125);
+            this.reverb_checkBox.Name = "reverb_checkBox";
+            this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
+            this.reverb_checkBox.TabIndex = 31;
+            this.reverb_checkBox.Text = "Reverb";
+            this.reverb_checkBox.UseVisualStyleBackColor = true;
+            this.reverb_checkBox.CheckedChanged += new System.EventHandler(this.effects_CheckedChanged);
+            // 
+            // dist_checkBox
+            // 
+            this.dist_checkBox.AutoSize = true;
+            this.dist_checkBox.Location = new System.Drawing.Point(336, 150);
+            this.dist_checkBox.Name = "dist_checkBox";
+            this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
+            this.dist_checkBox.TabIndex = 32;
+            this.dist_checkBox.Text = "Distortion";
+            this.dist_checkBox.UseVisualStyleBackColor = true;
+            this.dist_checkBox.CheckedChanged += new System.EventHandler(this.effects_CheckedChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(104, 187);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.TabIndex = 42;
+            this.label13.Text = "Cutoff";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(104, 141);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(59, 13);
+            this.label14.TabIndex = 41;
+            this.label14.Text = "CenterFreq";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(104, 95);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(57, 13);
+            this.label15.TabIndex = 40;
+            this.label15.Text = "Bandwidth";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(104, 49);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(29, 13);
+            this.label16.TabIndex = 39;
+            this.label16.Text = "Gain";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(104, 3);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 38;
+            this.label17.Text = "Edge";
+            // 
+            // distCutoff
+            // 
+            this.distCutoff.Location = new System.Drawing.Point(3, 187);
+            this.distCutoff.Maximum = 8000;
+            this.distCutoff.Minimum = 100;
+            this.distCutoff.Name = "distCutoff";
+            this.distCutoff.Size = new System.Drawing.Size(104, 45);
+            this.distCutoff.TabIndex = 37;
+            this.distCutoff.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.distCutoff.Value = 100;
+            this.distCutoff.Scroll += new System.EventHandler(this.distFreq_Scroll);
+            // 
+            // distFreq
+            // 
+            this.distFreq.Location = new System.Drawing.Point(3, 141);
+            this.distFreq.Maximum = 8000;
+            this.distFreq.Minimum = 100;
+            this.distFreq.Name = "distFreq";
+            this.distFreq.Size = new System.Drawing.Size(104, 45);
+            this.distFreq.TabIndex = 36;
+            this.distFreq.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.distFreq.Value = 100;
+            this.distFreq.Scroll += new System.EventHandler(this.distFreq_Scroll);
+            // 
+            // distBand
+            // 
+            this.distBand.Location = new System.Drawing.Point(3, 95);
+            this.distBand.Maximum = 8000;
+            this.distBand.Minimum = 100;
+            this.distBand.Name = "distBand";
+            this.distBand.Size = new System.Drawing.Size(104, 45);
+            this.distBand.TabIndex = 35;
+            this.distBand.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.distBand.Value = 100;
+            this.distBand.Scroll += new System.EventHandler(this.distFreq_Scroll);
+            // 
+            // distGain
+            // 
+            this.distGain.Location = new System.Drawing.Point(3, 49);
+            this.distGain.Maximum = 0;
+            this.distGain.Minimum = -60;
+            this.distGain.Name = "distGain";
+            this.distGain.Size = new System.Drawing.Size(104, 45);
+            this.distGain.TabIndex = 34;
+            this.distGain.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.distGain.Value = -60;
+            this.distGain.Scroll += new System.EventHandler(this.distFreq_Scroll);
+            // 
+            // distEdge
+            // 
+            this.distEdge.Location = new System.Drawing.Point(3, 3);
+            this.distEdge.Maximum = 100;
+            this.distEdge.Name = "distEdge";
+            this.distEdge.Size = new System.Drawing.Size(104, 45);
+            this.distEdge.TabIndex = 33;
+            this.distEdge.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.distEdge.Scroll += new System.EventHandler(this.distFreq_Scroll);
+            // 
+            // recordButton
+            // 
+            this.recordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.recordButton.Location = new System.Drawing.Point(467, 306);
+            this.recordButton.Name = "recordButton";
+            this.recordButton.Size = new System.Drawing.Size(122, 38);
+            this.recordButton.TabIndex = 45;
+            this.recordButton.Text = "Start Record";
+            this.recordButton.UseVisualStyleBackColor = true;
+            this.recordButton.Click += new System.EventHandler(this.recordButton_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.distBand);
+            this.panel4.Controls.Add(this.distEdge);
+            this.panel4.Controls.Add(this.label13);
+            this.panel4.Controls.Add(this.distGain);
+            this.panel4.Controls.Add(this.label14);
+            this.panel4.Controls.Add(this.distFreq);
+            this.panel4.Controls.Add(this.label15);
+            this.panel4.Controls.Add(this.distCutoff);
+            this.panel4.Controls.Add(this.label16);
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Enabled = false;
+            this.panel4.Location = new System.Drawing.Point(464, 12);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(179, 255);
+            this.panel4.TabIndex = 46;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 460);
+            this.ClientSize = new System.Drawing.Size(655, 460);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.recordButton);
+            this.Controls.Add(this.dist_checkBox);
+            this.Controls.Add(this.reverb_checkBox);
             this.Controls.Add(this.arp_checkBox);
             this.Controls.Add(this.domainUpDown1);
             this.Controls.Add(this.label11);
@@ -501,6 +679,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.freq3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distCutoff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distBand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distGain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.distEdge)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,6 +728,20 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.CheckBox arp_checkBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox reverb_checkBox;
+        private System.Windows.Forms.CheckBox dist_checkBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TrackBar distCutoff;
+        private System.Windows.Forms.TrackBar distFreq;
+        private System.Windows.Forms.TrackBar distBand;
+        private System.Windows.Forms.TrackBar distGain;
+        private System.Windows.Forms.TrackBar distEdge;
+        private System.Windows.Forms.Button recordButton;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 

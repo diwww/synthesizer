@@ -18,12 +18,12 @@ namespace SoundGenerator
         {
             this.BackColor = Color.DimGray;
             mainForm = form;
-            form.openFlag = true;
+            form.openFlag_gr = true;
             //chart1.AntiAliasing = AntiAliasingStyles.Graphics;
             chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
-            chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.False;
+            //chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.False;
             //chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
             chart1.ChartAreas[0].BackColor = Color.DimGray;
             chart1.BackColor = Color.DimGray;
         }
@@ -35,7 +35,7 @@ namespace SoundGenerator
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainForm.openFlag = false;
+            mainForm.openFlag_gr = false;
         }
 
         private void ShowTable()
