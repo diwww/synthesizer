@@ -6,9 +6,6 @@ using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
 using System.Collections.Generic;
-using CSCore.SoundIn;
-using CSCore.Codecs.WAV;
-
 
 namespace SoundGenerator
 {
@@ -28,9 +25,9 @@ namespace SoundGenerator
         // Flags
         public bool openFlag_gr = false;
         bool arpFlag = false;
+        bool recordFlag = false;
         // Additional forms
         Form2 f2;
-        Form3 f3;
         // Keys collections
         BindingList<Keys> pressedKeys;
         Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
@@ -38,15 +35,14 @@ namespace SoundGenerator
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         string path;
+        WavFileRecorder recorder;
 
         #endregion Variables
 
         # region Event handlers
-
         private void Form1_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-
             ofd.Filter = "Synth presets|*.sp";
             sfd.Filter = "Synth presets|*.sp";
             pictureBox1.Image = Properties.Resources._0;
@@ -453,44 +449,34 @@ namespace SoundGenerator
             effect.AllParameters = settings;
         }
 
-
-        WasapiCapture capture;
-        WaveWriter waveWriter;
-        private void button2_Click(object sender, EventArgs e)
+        private void recordButton_Click(object sender, EventArgs e)
         {
-            capture = new WasapiLoopbackCapture();
-            //if nessesary, you can choose a device here
-            //to do so, simply set the device property of the capture to any MMDevice
-            //to choose a device, take a look at the sample here: http://cscore.codeplex.com/
-
-            //initialize the selected device for recording
-            capture.Initialize();
-
-            //create a wavewriter to write the data to
-            
-            waveWriter = new WaveWriter("dump.wav", capture.WaveFormat);
-            
-            //setup an eventhandler to receive the recorded data
-            capture.DataAvailable += (s, c) =>
+            if (recordFlag == false)
             {
-                //save the recorded audio
-                waveWriter.Write(c.Data, c.Offset, c.ByteCount);
-            };
-
-            //start recording
-            capture.Start();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (capture != null)
-            {
-                capture.Stop();
-                capture.Dispose();
+                try
+                {
+                    recorder = new WavFileRecorder("new.wav");
+                    recorder.StartRecord();
+                    recordFlag = true;
+                    recordButton.Text = "Recording/Stop";
+                    recordButton.BackColor = Color.Red;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            if (waveWriter != null)
+            else
             {
-                waveWriter.Dispose();
+                if (recorder != null)
+                {
+                    recorder.StopRecord();
+                    recorder.Dispose();
+                    recorder = null;
+                    recordFlag = false;
+                    recordButton.Text = "Start Record";
+                    recordButton.BackColor = SystemColors.Control;
+                }
             }
         }
     }

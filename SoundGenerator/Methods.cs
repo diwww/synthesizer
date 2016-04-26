@@ -6,84 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.DirectX.DirectSound;
 using Synthesizer;
-using CSCore.SoundIn;
-using CSCore.Codecs.WAV;
-using CSCore.CoreAudioAPI;
 
 namespace SoundGenerator
 {
     public static class Methods
     {
-        public static IEnumerable<MMDevice> EnumerateWasapiDevices()
-        {
-            using (MMDeviceEnumerator enumerator = new MMDeviceEnumerator())
-            {
-                return enumerator.EnumAudioEndpoints(DataFlow.Render, DeviceState.Active);
-            }
-        }
-
-        public static void DataToWav()
-        {
-            using (WasapiCapture capture = new WasapiLoopbackCapture())
-            {
-                //if nessesary, you can choose a device here
-                //to do so, simply set the device property of the capture to any MMDevice
-                //to choose a device, take a look at the sample here: http://cscore.codeplex.com/
-
-                capture.Device = EnumerateWasapiDevices().First();
-
-                //initialize the selected device for recording
-                capture.Initialize();
-
-                //create a wavewriter to write the data to
-                using (WaveWriter w = new WaveWriter("dump.wav", capture.WaveFormat))
-                {
-                    //setup an eventhandler to receive the recorded data
-                    capture.DataAvailable += (s, e) =>
-                    {
-                        //save the recorded audio
-                        w.Write(e.Data, e.Offset, e.ByteCount);
-                    };
-
-                    //start recording
-                    capture.Start();
-
-                    //stop recording
-                    capture.Stop();
-                }
-            }
-        }
-
-
-        //public static CaptureBuffer CaptureBufferInit()
-        //{
-        //    WaveFormat waveFormat = new WaveFormat();
-        //    waveFormat.SamplesPerSecond = Constants.samplesPerSec;
-        //    waveFormat.Channels = Constants.channels;
-        //    waveFormat.FormatTag = WaveFormatTag.Pcm;
-        //    waveFormat.BitsPerSample = 16;
-        //    waveFormat.BlockAlign = (short)(Constants.channels * (waveFormat.BitsPerSample / 8));
-        //    waveFormat.AverageBytesPerSecond = Constants.samplesPerSec * waveFormat.BlockAlign;
-
-        //    CaptureBufferDescription bufferDesc = new CaptureBufferDescription();
-        //    bufferDesc.Format = waveFormat;
-        //    uint bufferDuration = 10;
-        //    bufferDesc.BufferBytes = Convert.ToInt32(
-        //        bufferDuration * waveFormat.AverageBytesPerSecond / waveFormat.Channels);
-
-        //    CaptureDevicesCollection captureDevices = new CaptureDevicesCollection();
-
-
-        //    Guid speakersGuid = new Guid("d20e3624-6955-49db-ba1b-d1c009ea3942");
-
-        //    Capture cap = new Capture(speakersGuid);
-
-        //    CaptureBuffer buffer = new CaptureBuffer(bufferDesc, cap);
-
-        //    return buffer;
-
-        //}
-
         public static SecondaryBuffer InitializeBuffer(IntPtr handle)
         {
             // Buffer settings
