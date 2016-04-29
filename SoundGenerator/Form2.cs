@@ -8,6 +8,8 @@ namespace SoundGenerator
     {
         Form1 mainForm;
 
+        // TODO : dock = fill не рефрешит чарт
+
         public Form2()
         {
             InitializeComponent();
@@ -28,6 +30,11 @@ namespace SoundGenerator
             chart1.BackColor = Color.DimGray;
         }
 
+        private void Form2_Load(object sender, System.EventArgs e)
+        {
+            ShowTable();
+        }
+
         private void Form2_Paint(object sender, PaintEventArgs e)
         {
             ShowTable();
@@ -46,13 +53,12 @@ namespace SoundGenerator
             chart1.Series["WAVE"].Color = Color.Cyan;
             chart1.Series["WAVE"].IsVisibleInLegend = false;
             chart1.Series["WAVE"].BorderWidth = 2;
-            for (int i = 500; i < 2500; i++)
+            for (int i = 0; i < 2000; i++)
             {
                 DataPoint dp = new DataPoint();
                 dp.SetValueXY(i, mainForm.waveData[i]);
                 chart1.Series["WAVE"].Points.Add(dp);
             }
         }
-
     }
 }
