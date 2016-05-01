@@ -230,6 +230,74 @@ namespace SoundGenerator
             arpFlag = arp_checkBox.Checked;
         }
 
+        private void effects_CheckedChanged(object sender, EventArgs e)
+        {
+            List<EffectDescription> effects = new List<EffectDescription>();
+            if (reverb_checkBox.Checked)
+            {
+                EffectDescription reverb = new EffectDescription { GuidEffectClass = DSoundHelper.StandardWavesReverbGuid };
+                effects.Add(reverb);
+            }
+            if (dist_checkBox.Checked)
+            {
+                EffectDescription dist = new EffectDescription { GuidEffectClass = DSoundHelper.StandardDistortionGuid };
+                effects.Add(dist);
+            }
+
+            buffer.Stop();
+            if (effects.Count > 0)
+                buffer.SetEffects(effects.ToArray());
+            else
+                buffer.SetEffects(null);
+            buffer.Play(0, BufferPlayFlags.Looping);
+        }
+
+        private void distFreq_Scroll(object sender, EventArgs e)
+        {
+            DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
+
+            EffectsDistortion settings = effect.AllParameters;
+
+            settings.Edge = distEdge.Value;
+            settings.Gain = distGain.Value;
+            settings.PostEqBandwidth = distBand.Value;
+            settings.PostEqCenterFrequency = distFreq.Value;
+            settings.PreLowpassCutoff = distCutoff.Value;
+
+            effect.AllParameters = settings;
+        }
+
+        private void recordButton_Click(object sender, EventArgs e)
+        {
+            if (recordFlag == false)
+            {
+                try
+                {
+                    recorder = new WavFileRecorder("new.wav");
+                    recorder.StartRecord();
+                    recordFlag = true;
+                    recordButton.Text = "Recording/Stop";
+                    recordButton.BackColor = Color.Red;
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                if (recorder != null)
+                {
+                    recorder.StopRecord();
+                    recorder.Dispose();
+                    recorder = null;
+                    recordFlag = false;
+                    recordButton.Text = "Start Record";
+                    recordButton.BackColor = SystemColors.Control;
+                }
+            }
+        }
+
         #endregion Event handlers
 
         #region Methods
@@ -410,108 +478,6 @@ namespace SoundGenerator
             //buffer.Write(0, waveData, LockFlag.EntireBuffer);
         }
 
-        #endregion Trash
-
-        private void effects_CheckedChanged(object sender, EventArgs e)
-        {
-            List<EffectDescription> effects = new List<EffectDescription>();
-            if (reverb_checkBox.Checked)
-            {
-                EffectDescription reverb = new EffectDescription { GuidEffectClass = DSoundHelper.StandardWavesReverbGuid };
-                effects.Add(reverb);
-            }
-            if (dist_checkBox.Checked)
-            {
-                EffectDescription dist = new EffectDescription { GuidEffectClass = DSoundHelper.StandardDistortionGuid };
-                effects.Add(dist);
-            }
-
-            buffer.Stop();
-            if (effects.Count > 0)
-                buffer.SetEffects(effects.ToArray());
-            else
-                buffer.SetEffects(null);
-            buffer.Play(0, BufferPlayFlags.Looping);
-        }
-
-        private void distFreq_Scroll(object sender, EventArgs e)
-        {
-            DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
-
-            EffectsDistortion settings = effect.AllParameters;
-
-            settings.Edge = distEdge.Value;
-            settings.Gain = distGain.Value;
-            settings.PostEqBandwidth = distBand.Value;
-            settings.PostEqCenterFrequency = distFreq.Value;
-            settings.PreLowpassCutoff = distCutoff.Value;
-
-            effect.AllParameters = settings;
-        }
-
-        private void recordButton_Click(object sender, EventArgs e)
-        {
-            if (recordFlag == false)
-            {
-                try
-                {
-                    recorder = new WavFileRecorder("new.wav");
-                    recorder.StartRecord();
-                    recordFlag = true;
-                    recordButton.Text = "Recording/Stop";
-                    recordButton.BackColor = Color.Red;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                if (recorder != null)
-                {
-                    recorder.StopRecord();
-                    recorder.Dispose();
-                    recorder = null;
-                    recordFlag = false;
-                    recordButton.Text = "Start Record";
-                    recordButton.BackColor = SystemColors.Control;
-                }
-            }
-        }
+        #endregion Trash       
     }
 }
-//capBuffer = Methods.CaptureBufferInit();
-//capBuffer.Start(true);
-//MessageBox.Show(capBuffer.Capturing.ToString(
-
-//capBuffer.Stop();
-//MessageBox.Show(capBuffer.Capturing.ToString());
-//short[] data = (short[])capBuffer.Read(0, typeof(short), LockFlag.None, 0)
-//buffer.Write(0, data, LockFlag.EntireBuffer);
-
-
-
-//public bool openFlag_fx = false;
-
-
-//private void fx_checkBox_CheckedChanged(object sender, EventArgs e)
-//{
-//    if (fx_checkBox.Checked)
-//    {
-//        if (openFlag_fx == false)
-//        {
-//            f3 = new Form3(this);
-//            f3.Show();
-//        }
-//        f3.Refresh();
-//        f3.BringToFront();
-//    }
-//    else
-//    {
-//        buffer.Stop();
-//        buffer.SetEffects(null);
-//        buffer.Play(0, BufferPlayFlags.Looping);
-//        f3.Close();
-//    }
-//}
