@@ -6,6 +6,9 @@ using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+
+// TODO: Когда листаешь листбокс колесиком мыши, отключается арпеджиатор
 
 namespace SoundGenerator
 {
@@ -15,7 +18,7 @@ namespace SoundGenerator
 
         // Oscillator and Mixer variables
         Oscillator.WaveType w1, w2, w3;
-        Oscillator osc1, osc2, osc3;
+        Oscillator[] oscs;
         public short[] waveData;
         int octave;
         int k = 0; // Arpeggiator status
@@ -35,22 +38,26 @@ namespace SoundGenerator
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         string path;
+        BindingList<Preset> presets = new BindingList<Preset>();
         WavFileRecorder recorder;
 
         #endregion Variables
 
         # region Event handlers
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-            ofd.Filter = "Synth presets|*.sp";
-            sfd.Filter = "Synth presets|*.sp";
+            sfd.Filter = ofd.Filter = "Synth presets|*.sp";
+            ofd.Multiselect = true;
+            presets_listBox.DataSource = presets;
+            presets_listBox.ValueMember = "FullName";
+            presets_listBox.DisplayMember = "Name";
             pictureBox1.Image = Properties.Resources._0;
 
             // Initialize list for pressed keys
-            Array.Sort(synthKeys);
+            Array.Sort<Keys>(synthKeys);
             pressedKeys = new BindingList<Keys>();
-            listBox1.DataSource = pressedKeys;
 
             // Octave selection
             domainUpDown1.SelectedIndex = 2;
@@ -99,7 +106,6 @@ namespace SoundGenerator
             try
             {
                 PlayNote(e);
-                label12.Text = buffer.Volume.ToString() + " " + k.ToString();
             }
             catch (NullReferenceException)
             { }
@@ -121,19 +127,22 @@ namespace SoundGenerator
                     path = @sfd.FileName;
                     using (FileStream stream = new FileStream(path, FileMode.Create))
                     {
-                        using (BinaryWriter writer = new BinaryWriter(stream))
-                        {
-                            writer.Write(comboBox1.SelectedIndex);
-                            writer.Write(amp1.Value);
-                            writer.Write(freq1.Value);
-                            writer.Write(comboBox2.SelectedIndex);
-                            writer.Write(amp2.Value);
-                            writer.Write(freq2.Value);
-                            writer.Write(comboBox3.SelectedIndex);
-                            writer.Write(amp3.Value);
-                            writer.Write(freq3.Value);
-                            label11.Text = String.Format(Path.GetFileName(path).ToString());
-                        }
+                        BinaryFormatter formatter = new BinaryFormatter();
+
+                        //formatter.Serialize
+
+                        //using (StreamWriter writer = new StreamWriter(stream))
+                        //{
+                        //    writer.Write(comboBox1.SelectedIndex);
+                        //    writer.Write(amp1.Value);
+                        //    writer.Write(freq1.Value);
+                        //    writer.Write(comboBox2.SelectedIndex);
+                        //    writer.Write(amp2.Value);
+                        //    writer.Write(freq2.Value);
+                        //    writer.Write(comboBox3.SelectedIndex);
+                        //    writer.Write(amp3.Value);
+                        //    writer.Write(freq3.Value);
+                        //}
                     }
                 }
                 catch (Exception exc)
@@ -149,24 +158,12 @@ namespace SoundGenerator
                 return;
             else
             {
-                path = @ofd.FileName;
                 try
                 {
-                    using (FileStream stream = new FileStream(path, FileMode.Open))
+                    presets.Clear();
+                    foreach (var name in ofd.FileNames)
                     {
-                        using (BinaryReader reader = new BinaryReader(stream))
-                        {
-                            comboBox1.SelectedIndex = (reader.ReadInt32());
-                            amp1.Value = reader.ReadInt32();
-                            freq1.Value = reader.ReadInt32();
-                            comboBox2.SelectedIndex = (reader.ReadInt32());
-                            amp2.Value = reader.ReadInt32();
-                            freq2.Value = reader.ReadInt32();
-                            comboBox3.SelectedIndex = (reader.ReadInt32());
-                            amp3.Value = reader.ReadInt32();
-                            freq3.Value = reader.ReadInt32();
-                            label11.Text = String.Format(Path.GetFileName(path).ToString());
-                        }
+                        presets.Add(new Preset(name));
                     }
                 }
                 catch (Exception)
@@ -188,7 +185,6 @@ namespace SoundGenerator
             {
                 timer1.Enabled = false;
             }
-            label12.Text = buffer.Volume.ToString() + " " + k.ToString();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -456,12 +452,10 @@ namespace SoundGenerator
                 out w3);
 
             // Creating oscillators
-            osc1 = new Oscillator(w1, freq1.Value, amp1.Value);
-            osc2 = new Oscillator(w2, freq2.Value, amp2.Value);
-            osc3 = new Oscillator(w3, freq3.Value, amp3.Value);
+            oscs = new Oscillator[3] { new Oscillator(w1, freq1.Value, amp1.Value), new Oscillator(w2, freq2.Value, amp2.Value), new Oscillator(w3, freq3.Value, amp3.Value) };
 
             // Writing waveData to array of samples
-            waveData = Mixer.MixWaves(osc1, osc2, osc3);
+            waveData = Mixer.MixWaves(oscs);
 
             // Write to buffer
             buffer.Write(0, waveData, LockFlag.EntireBuffer);
@@ -478,6 +472,45 @@ namespace SoundGenerator
             //buffer.Write(0, waveData, LockFlag.EntireBuffer);
         }
 
-        #endregion Trash       
+        #endregion Trash
+
+        private void presets_listBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            //using (FileStream stream = new FileStream(presets_listBox.SelectedValue.ToString(), FileMode.Open))
+            //{
+            //    using (BinaryReader reader = new BinaryReader(stream))
+            //    {
+            //        comboBox1.SelectedIndex = (reader.ReadInt32());
+            //        amp1.Value = reader.ReadInt32();
+            //        freq1.Value = reader.ReadInt32();
+            //        comboBox2.SelectedIndex = (reader.ReadInt32());
+            //        amp2.Value = reader.ReadInt32();
+            //        freq2.Value = reader.ReadInt32();
+            //        comboBox3.SelectedIndex = (reader.ReadInt32());
+            //        amp3.Value = reader.ReadInt32();
+            //        freq3.Value = reader.ReadInt32();
+            //    }
+            //}
+        }
+
+        private void presets_listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (FileStream stream = new FileStream(presets_listBox.SelectedValue.ToString(), FileMode.Open))
+            {
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    comboBox1.SelectedIndex = (reader.ReadInt32());
+                    amp1.Value = reader.ReadInt32();
+                    freq1.Value = reader.ReadInt32();
+                    comboBox2.SelectedIndex = (reader.ReadInt32());
+                    amp2.Value = reader.ReadInt32();
+                    freq2.Value = reader.ReadInt32();
+                    comboBox3.SelectedIndex = (reader.ReadInt32());
+                    amp3.Value = reader.ReadInt32();
+                    freq3.Value = reader.ReadInt32();
+                }
+            }
+        }
     }
 }

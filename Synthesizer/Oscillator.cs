@@ -115,16 +115,3 @@ namespace Synthesizer
         #endregion Methods
     }
 }
-//// UNSTABLE SOUND AND EXCEPTION
-//private void Triangle()
-//{
-//    short step = Convert.ToInt16((amplitude * 2) / samplesPerPeriod);
-//    short tempSample = (short)-amplitude;
-//    for (int i = 1; i < Constants.samplesAmount; i++)
-//    {
-//        if (Math.Abs(tempSample) > amplitude)
-//            step = (short)-step;
-//        tempSample += step;
-//        data[i] = tempSample;
-//    }
-//}

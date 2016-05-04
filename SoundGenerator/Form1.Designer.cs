@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -54,12 +53,9 @@
             this.freq3 = new System.Windows.Forms.TrackBar();
             this.amp3 = new System.Windows.Forms.TrackBar();
             this.graphButton = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -78,6 +74,8 @@
             this.distEdge = new System.Windows.Forms.TrackBar();
             this.recordButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.presets_listBox = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
@@ -98,7 +96,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.comboBox1);
@@ -111,15 +108,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 141);
             this.panel1.TabIndex = 10;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(187, 13);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "label12";
             // 
             // button1
             // 
@@ -379,19 +367,9 @@
             this.graphButton.UseVisualStyleBackColor = false;
             this.graphButton.Click += new System.EventHandler(this.graphButton_Click);
             // 
-            // listBox1
-            // 
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(336, 175);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(122, 39);
-            this.listBox1.TabIndex = 22;
-            this.listBox1.TabStop = false;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(336, 220);
+            this.pictureBox1.Location = new System.Drawing.Point(336, 368);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(122, 80);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -404,7 +382,7 @@
             this.saveButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Violet;
             this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(336, 306);
+            this.saveButton.Location = new System.Drawing.Point(336, 123);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(122, 38);
             this.saveButton.TabIndex = 10;
@@ -419,32 +397,14 @@
             this.openButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Violet;
             this.openButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.openButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openButton.Location = new System.Drawing.Point(336, 410);
+            this.openButton.Location = new System.Drawing.Point(336, 167);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(122, 38);
             this.openButton.TabIndex = 11;
             this.openButton.TabStop = false;
-            this.openButton.Text = "Open Preset";
+            this.openButton.Text = "Open Presets";
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(336, 350);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 13);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Current Preset:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(336, 373);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "-";
             // 
             // timer1
             // 
@@ -486,7 +446,7 @@
             // reverb_checkBox
             // 
             this.reverb_checkBox.AutoSize = true;
-            this.reverb_checkBox.Location = new System.Drawing.Point(336, 125);
+            this.reverb_checkBox.Location = new System.Drawing.Point(542, 273);
             this.reverb_checkBox.Name = "reverb_checkBox";
             this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
             this.reverb_checkBox.TabIndex = 31;
@@ -497,7 +457,7 @@
             // dist_checkBox
             // 
             this.dist_checkBox.AutoSize = true;
-            this.dist_checkBox.Location = new System.Drawing.Point(336, 150);
+            this.dist_checkBox.Location = new System.Drawing.Point(467, 273);
             this.dist_checkBox.Name = "dist_checkBox";
             this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
             this.dist_checkBox.TabIndex = 32;
@@ -611,7 +571,7 @@
             // recordButton
             // 
             this.recordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recordButton.Location = new System.Drawing.Point(467, 306);
+            this.recordButton.Location = new System.Drawing.Point(505, 306);
             this.recordButton.Name = "recordButton";
             this.recordButton.Size = new System.Drawing.Size(122, 38);
             this.recordButton.TabIndex = 45;
@@ -637,23 +597,41 @@
             this.panel4.Size = new System.Drawing.Size(179, 255);
             this.panel4.TabIndex = 46;
             // 
+            // presets_listBox
+            // 
+            this.presets_listBox.FormattingEnabled = true;
+            this.presets_listBox.Location = new System.Drawing.Point(336, 229);
+            this.presets_listBox.Name = "presets_listBox";
+            this.presets_listBox.Size = new System.Drawing.Size(120, 95);
+            this.presets_listBox.TabIndex = 47;
+            this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
+            this.presets_listBox.SelectedValueChanged += new System.EventHandler(this.presets_listBox_SelectedValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(336, 213);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 13);
+            this.label10.TabIndex = 48;
+            this.label10.Text = "Presets";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 460);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.presets_listBox);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.recordButton);
             this.Controls.Add(this.dist_checkBox);
             this.Controls.Add(this.reverb_checkBox);
             this.Controls.Add(this.arp_checkBox);
             this.Controls.Add(this.domainUpDown1);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.graphButton);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -717,18 +695,14 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button openButton;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.CheckBox arp_checkBox;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox reverb_checkBox;
         private System.Windows.Forms.CheckBox dist_checkBox;
         private System.Windows.Forms.Label label13;
@@ -743,6 +717,8 @@
         private System.Windows.Forms.TrackBar distEdge;
         private System.Windows.Forms.Button recordButton;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ListBox presets_listBox;
+        private System.Windows.Forms.Label label10;
     }
 }
 
