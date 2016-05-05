@@ -96,8 +96,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -112,7 +110,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(141, 66);
+            this.button1.Location = new System.Drawing.Point(536, 277);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 23);
             this.button1.TabIndex = 14;
@@ -123,7 +121,7 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(58, 69);
+            this.textBox1.Location = new System.Drawing.Point(462, 279);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(68, 20);
             this.textBox1.TabIndex = 21;
@@ -445,7 +443,8 @@
             // reverb_checkBox
             // 
             this.reverb_checkBox.AutoSize = true;
-            this.reverb_checkBox.Location = new System.Drawing.Point(336, 156);
+            this.reverb_checkBox.Enabled = false;
+            this.reverb_checkBox.Location = new System.Drawing.Point(580, 260);
             this.reverb_checkBox.Name = "reverb_checkBox";
             this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
             this.reverb_checkBox.TabIndex = 31;
@@ -456,7 +455,7 @@
             // dist_checkBox
             // 
             this.dist_checkBox.AutoSize = true;
-            this.dist_checkBox.Location = new System.Drawing.Point(336, 128);
+            this.dist_checkBox.Location = new System.Drawing.Point(464, 260);
             this.dist_checkBox.Name = "dist_checkBox";
             this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
             this.dist_checkBox.TabIndex = 32;
@@ -569,6 +568,7 @@
             // 
             // recordButton
             // 
+            this.recordButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.recordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.recordButton.Location = new System.Drawing.Point(336, 204);
             this.recordButton.Name = "recordButton";
@@ -591,7 +591,7 @@
             this.panel4.Controls.Add(this.label16);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Enabled = false;
-            this.panel4.Location = new System.Drawing.Point(464, 12);
+            this.panel4.Location = new System.Drawing.Point(462, 12);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(179, 242);
             this.panel4.TabIndex = 46;
@@ -619,7 +619,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 460);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.presets_listBox);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.recordButton);

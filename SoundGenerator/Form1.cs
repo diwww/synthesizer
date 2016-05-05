@@ -231,10 +231,28 @@ namespace SoundGenerator
             }
 
             buffer.Stop();
+
             if (effects.Count > 0)
+            {
                 buffer.SetEffects(effects.ToArray());
+
+                DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
+                EffectsDistortion settings = effect.AllParameters;
+
+                distEdge.Value = (int)settings.Edge;
+                distGain.Value = (int)settings.Gain;
+                distBand.Value = (int)settings.PostEqBandwidth;
+                distFreq.Value = (int)settings.PostEqCenterFrequency;
+                distCutoff.Value = (int)settings.PreLowpassCutoff;
+
+                panel4.Enabled = true;
+            }
             else
+            {
                 buffer.SetEffects(null);
+                panel4.Enabled = false;
+            }
+
             buffer.Play(0, BufferPlayFlags.Looping);
         }
 
