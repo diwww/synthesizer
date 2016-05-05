@@ -424,7 +424,7 @@
             this.domainUpDown1.TabStop = false;
             this.domainUpDown1.Text = "domainUpDown1";
             this.domainUpDown1.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
-            this.domainUpDown1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeydDown);
+            this.domainUpDown1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
             // timer2
             // 
@@ -605,7 +605,7 @@
             this.presets_listBox.Size = new System.Drawing.Size(120, 95);
             this.presets_listBox.TabIndex = 47;
             this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
-            this.presets_listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeydDown);
+            this.presets_listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
             // label10
             // 

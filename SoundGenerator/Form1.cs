@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
 // TODO: Когда листаешь листбокс колесиком мыши, отключается арпеджиатор
+// TODO: Автоматическая загрузка пресета, когда удален первый
 
 namespace SoundGenerator
 {
@@ -162,6 +163,7 @@ namespace SoundGenerator
                 {
                     presets.Add(new Preset(name));
                 }
+                presets_listBox_SelectedIndexChanged(this, e);
             }
         }
 
@@ -332,16 +334,15 @@ namespace SoundGenerator
             catch (Exception)
             {
                 MessageBox.Show("Wrong preset file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (presets_listBox.SelectedIndex < presets.Count)
-                {
-                    presets.RemoveAt(presets_listBox.SelectedIndex);
-                }
+                presets.RemoveAt(presets_listBox.SelectedIndex);
+                if (presets.Count > 0)
+                    presets_listBox.SelectedIndex = 0;
             }
         }
 
         // Disable listBox and domainUpDown 
         // auto select item when pressing key
-        private void listbox_KeydDown(object sender, KeyEventArgs e)
+        private void listbox_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = true;
         }
@@ -523,6 +524,8 @@ namespace SoundGenerator
             //waveData = Filter.LowPass(waveData, cutoff);
             //buffer.Write(0, waveData, LockFlag.EntireBuffer);
         }
+
+
 
 
         //---Serialization (not working properly)---//
