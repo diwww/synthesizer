@@ -44,31 +44,5 @@ namespace SoundGenerator
         {
             return (int)(44100 / octave * Math.Pow(2, (double)index / 12));
         }
-
-        public static void SavePreset(string path)
-        {
-            //path = @sfd.FileName;
-            //using (FileStream stream = new FileStream(path, FileMode.Create))
-            //{
-            //    using (BinaryWriter writer = new BinaryWriter(stream))
-            //    {
-            //        writer.Write(comboBox1.SelectedIndex);
-            //        writer.Write(amp1.Value);
-            //        writer.Write(freq1.Value);
-            //        writer.Write(comboBox2.SelectedIndex);
-            //        writer.Write(amp2.Value);
-            //        writer.Write(freq2.Value);
-            //        writer.Write(comboBox3.SelectedIndex);
-            //        writer.Write(amp3.Value);
-            //        writer.Write(freq3.Value);
-            //        label11.Text = String.Format(Path.GetFileName(path).ToString());
-            //    }
-            //}
-        }
-
-        public static void OpenPreset(string path)
-        {
-
-        }
     }
 }

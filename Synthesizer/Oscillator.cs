@@ -84,7 +84,7 @@ namespace Synthesizer
                 for (int i = 0; (i < samplesPerPeriod) && (totalSamplesWritten < Constants.samplesAmount); i++)
                 {
                     tempSample += step;
-                    data[totalSamplesWritten] = (short)(2  * Math.Abs(tempSample) - amplitude);  // The only difference from Saw
+                    data[totalSamplesWritten] = (short)(2 * Math.Abs(tempSample) - amplitude);  // The only difference from Saw
                     totalSamplesWritten++;
                 }
             }

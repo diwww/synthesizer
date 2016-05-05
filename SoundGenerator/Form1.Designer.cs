@@ -369,9 +369,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(336, 368);
+            this.pictureBox1.Location = new System.Drawing.Point(462, 305);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(122, 80);
+            this.pictureBox1.Size = new System.Drawing.Size(181, 141);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
@@ -382,7 +382,7 @@
             this.saveButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Violet;
             this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(336, 123);
+            this.saveButton.Location = new System.Drawing.Point(336, 408);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(122, 38);
             this.saveButton.TabIndex = 10;
@@ -397,7 +397,7 @@
             this.openButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Violet;
             this.openButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.openButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openButton.Location = new System.Drawing.Point(336, 167);
+            this.openButton.Location = new System.Drawing.Point(336, 248);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(122, 38);
             this.openButton.TabIndex = 11;
@@ -429,7 +429,6 @@
             // 
             // timer2
             // 
-            this.timer2.Interval = 110;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // arp_checkBox
@@ -446,7 +445,7 @@
             // reverb_checkBox
             // 
             this.reverb_checkBox.AutoSize = true;
-            this.reverb_checkBox.Location = new System.Drawing.Point(542, 273);
+            this.reverb_checkBox.Location = new System.Drawing.Point(336, 156);
             this.reverb_checkBox.Name = "reverb_checkBox";
             this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
             this.reverb_checkBox.TabIndex = 31;
@@ -457,7 +456,7 @@
             // dist_checkBox
             // 
             this.dist_checkBox.AutoSize = true;
-            this.dist_checkBox.Location = new System.Drawing.Point(467, 273);
+            this.dist_checkBox.Location = new System.Drawing.Point(336, 128);
             this.dist_checkBox.Name = "dist_checkBox";
             this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
             this.dist_checkBox.TabIndex = 32;
@@ -571,7 +570,7 @@
             // recordButton
             // 
             this.recordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recordButton.Location = new System.Drawing.Point(505, 306);
+            this.recordButton.Location = new System.Drawing.Point(336, 204);
             this.recordButton.Name = "recordButton";
             this.recordButton.Size = new System.Drawing.Size(122, 38);
             this.recordButton.TabIndex = 45;
@@ -594,23 +593,22 @@
             this.panel4.Enabled = false;
             this.panel4.Location = new System.Drawing.Point(464, 12);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(179, 255);
+            this.panel4.Size = new System.Drawing.Size(179, 242);
             this.panel4.TabIndex = 46;
             // 
             // presets_listBox
             // 
             this.presets_listBox.FormattingEnabled = true;
-            this.presets_listBox.Location = new System.Drawing.Point(336, 229);
+            this.presets_listBox.Location = new System.Drawing.Point(336, 305);
             this.presets_listBox.Name = "presets_listBox";
             this.presets_listBox.Size = new System.Drawing.Size(120, 95);
             this.presets_listBox.TabIndex = 47;
             this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
-            this.presets_listBox.SelectedValueChanged += new System.EventHandler(this.presets_listBox_SelectedValueChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(336, 213);
+            this.label10.Location = new System.Drawing.Point(336, 289);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 13);
             this.label10.TabIndex = 48;
