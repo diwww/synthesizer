@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.freq1 = new System.Windows.Forms.TrackBar();
             this.amp1 = new System.Windows.Forms.TrackBar();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -107,26 +107,6 @@
             this.panel1.Size = new System.Drawing.Size(318, 141);
             this.panel1.TabIndex = 10;
             // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(536, 277);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(462, 279);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(68, 20);
-            this.textBox1.TabIndex = 21;
-            this.textBox1.Text = "440";
-            // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -192,6 +172,26 @@
             this.amp1.TickFrequency = 3276;
             this.amp1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
             this.amp1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(536, 277);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(462, 279);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(68, 20);
+            this.textBox1.TabIndex = 21;
+            this.textBox1.Text = "440";
             // 
             // panel2
             // 
@@ -424,6 +424,7 @@
             this.domainUpDown1.TabStop = false;
             this.domainUpDown1.Text = "domainUpDown1";
             this.domainUpDown1.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
+            this.domainUpDown1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeydDown);
             // 
             // timer2
             // 
@@ -604,6 +605,7 @@
             this.presets_listBox.Size = new System.Drawing.Size(120, 95);
             this.presets_listBox.TabIndex = 47;
             this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
+            this.presets_listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeydDown);
             // 
             // label10
             // 

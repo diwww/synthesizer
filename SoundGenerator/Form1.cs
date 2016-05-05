@@ -339,6 +339,14 @@ namespace SoundGenerator
             }
         }
 
+        // Disable listBox and domainUpDown 
+        // auto select item when pressing key
+        private void listbox_KeydDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+
+
         #endregion Event handlers
 
         #region Methods
@@ -515,6 +523,7 @@ namespace SoundGenerator
             //waveData = Filter.LowPass(waveData, cutoff);
             //buffer.Write(0, waveData, LockFlag.EntireBuffer);
         }
+
 
         //---Serialization (not working properly)---//
 
