@@ -361,6 +361,8 @@ namespace SoundGenerator
             {
                 if (arpFlag)
                     PlayArp();
+                else
+                    StopArp();
                 if (k == 0)
                     timer1.Enabled = false;
             }
