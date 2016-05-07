@@ -32,15 +32,15 @@ namespace SoundGenerator
         public bool openFlag_gr = false;
         bool arpFlag = false;
         bool recordFlag = false;
-        
+
         // Additional forms
         Form2 f2;
-        
+
         // Сollections
         List<Keys> pressedKeys;
         Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
         BindingList<Preset> presets = new BindingList<Preset>();
-        
+
         // File dialogs
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
@@ -494,11 +494,18 @@ namespace SoundGenerator
 
         #region Trash
 
+        public short[] filteredData;
+
         private void button1_Click(object sender, EventArgs e)
         {
-            //int cutoff = Convert.ToInt32(textBox1.Text);
-            //waveData = Filter.LowPass(waveData, cutoff);
-            //buffer.Write(0, waveData, LockFlag.EntireBuffer);
+            int cutoff = Convert.ToInt32(textBox1.Text);
+            filteredData = Filter.LowPass(waveData, cutoff);
+            buffer.Write(0, filteredData, LockFlag.EntireBuffer);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 
