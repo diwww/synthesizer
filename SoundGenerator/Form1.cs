@@ -6,6 +6,11 @@ using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
+
+// TODO: Когда листаешь листбокс колесиком мыши, отключается арпеджиатор
+// TODO: Автоматическая загрузка пресета, когда удален первый
 
 namespace SoundGenerator
 {
@@ -15,42 +20,51 @@ namespace SoundGenerator
 
         // Oscillator and Mixer variables
         Oscillator.WaveType w1, w2, w3;
-        Oscillator osc1, osc2, osc3;
+        Oscillator[] oscs;
         public short[] waveData;
         int octave;
         int k = 0; // Arpeggiator status
 
         // DirectSound variables
         public SecondaryBuffer buffer;
+
         // Flags
         public bool openFlag_gr = false;
         bool arpFlag = false;
         bool recordFlag = false;
+        
         // Additional forms
         Form2 f2;
-        // Keys collections
-        BindingList<Keys> pressedKeys;
+        
+        // Сollections
+        List<Keys> pressedKeys;
         Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
+        BindingList<Preset> presets = new BindingList<Preset>();
+        
         // File dialogs
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         string path;
+
         WavFileRecorder recorder;
 
         #endregion Variables
 
         # region Event handlers
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-            ofd.Filter = "Synth presets|*.sp";
-            sfd.Filter = "Synth presets|*.sp";
+            sfd.Filter = ofd.Filter = "Synth presets|*.sp";
+            ofd.Multiselect = true;
+            presets_listBox.DataSource = presets;
+            presets_listBox.ValueMember = "FullName";
+            presets_listBox.DisplayMember = "Name";
             pictureBox1.Image = Properties.Resources._0;
 
             // Initialize list for pressed keys
-            Array.Sort(synthKeys);
-            pressedKeys = new BindingList<Keys>();
-            listBox1.DataSource = pressedKeys;
+            Array.Sort<Keys>(synthKeys);
+            pressedKeys = new List<Keys>();
 
             // Octave selection
             domainUpDown1.SelectedIndex = 2;
@@ -66,7 +80,7 @@ namespace SoundGenerator
 
             try
             {
-                buffer = Methods.InitializeBuffer(this.Handle);
+                buffer = Methods.InitializeBuffer(this);
                 GenerateWave();
                 buffer.Volume = (int)Volume.Min;
                 buffer.Frequency = Methods.NoteFreq(8, 1);
@@ -99,7 +113,6 @@ namespace SoundGenerator
             try
             {
                 PlayNote(e);
-                label12.Text = buffer.Volume.ToString() + " " + k.ToString();
             }
             catch (NullReferenceException)
             { }
@@ -126,13 +139,14 @@ namespace SoundGenerator
                             writer.Write(comboBox1.SelectedIndex);
                             writer.Write(amp1.Value);
                             writer.Write(freq1.Value);
+
                             writer.Write(comboBox2.SelectedIndex);
                             writer.Write(amp2.Value);
                             writer.Write(freq2.Value);
+
                             writer.Write(comboBox3.SelectedIndex);
                             writer.Write(amp3.Value);
                             writer.Write(freq3.Value);
-                            label11.Text = String.Format(Path.GetFileName(path).ToString());
                         }
                     }
                 }
@@ -149,32 +163,12 @@ namespace SoundGenerator
                 return;
             else
             {
-                path = @ofd.FileName;
-                try
+                presets.Clear();
+                foreach (var name in ofd.FileNames)
                 {
-                    using (FileStream stream = new FileStream(path, FileMode.Open))
-                    {
-                        using (BinaryReader reader = new BinaryReader(stream))
-                        {
-                            comboBox1.SelectedIndex = (reader.ReadInt32());
-                            amp1.Value = reader.ReadInt32();
-                            freq1.Value = reader.ReadInt32();
-                            comboBox2.SelectedIndex = (reader.ReadInt32());
-                            amp2.Value = reader.ReadInt32();
-                            freq2.Value = reader.ReadInt32();
-                            comboBox3.SelectedIndex = (reader.ReadInt32());
-                            amp3.Value = reader.ReadInt32();
-                            freq3.Value = reader.ReadInt32();
-                            label11.Text = String.Format(Path.GetFileName(path).ToString());
-                        }
-                    }
+                    presets.Add(new Preset(name));
                 }
-                catch (Exception)
-                {
-                    MessageBox.Show("Wrong preset file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                RefreshLabels();
-                GenerateWave();
+                presets_listBox_SelectedIndexChanged(this, e);
             }
         }
 
@@ -188,7 +182,6 @@ namespace SoundGenerator
             {
                 timer1.Enabled = false;
             }
-            label12.Text = buffer.Volume.ToString() + " " + k.ToString();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -202,6 +195,7 @@ namespace SoundGenerator
             {
                 timer1.Enabled = true;
             }
+
             k++;
         }
 
@@ -218,10 +212,6 @@ namespace SoundGenerator
         private void TrackBar_Scroll(object sender, EventArgs e)
         {
             RefreshLabels();
-        }
-
-        private void amp1_MouseUp(object sender, MouseEventArgs e)
-        {
             GenerateWave();
         }
 
@@ -245,10 +235,28 @@ namespace SoundGenerator
             }
 
             buffer.Stop();
+
             if (effects.Count > 0)
+            {
                 buffer.SetEffects(effects.ToArray());
+
+                DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
+                EffectsDistortion settings = effect.AllParameters;
+
+                distEdge.Value = (int)settings.Edge;
+                distGain.Value = (int)settings.Gain;
+                distBand.Value = (int)settings.PostEqBandwidth;
+                distFreq.Value = (int)settings.PostEqCenterFrequency;
+                distCutoff.Value = (int)settings.PreLowpassCutoff;
+
+                panel4.Enabled = true;
+            }
             else
+            {
                 buffer.SetEffects(null);
+                panel4.Enabled = false;
+            }
+
             buffer.Play(0, BufferPlayFlags.Looping);
         }
 
@@ -298,6 +306,50 @@ namespace SoundGenerator
             }
         }
 
+        private void presets_listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (presets.Count > 0)
+                {
+                    using (FileStream stream = new FileStream(presets_listBox.SelectedValue.ToString(), FileMode.Open))
+                    {
+                        using (BinaryReader reader = new BinaryReader(stream))
+                        {
+                            comboBox1.SelectedIndex = (reader.ReadInt32());
+                            amp1.Value = reader.ReadInt32();
+                            freq1.Value = reader.ReadInt32();
+
+                            comboBox2.SelectedIndex = (reader.ReadInt32());
+                            amp2.Value = reader.ReadInt32();
+                            freq2.Value = reader.ReadInt32();
+
+                            comboBox3.SelectedIndex = (reader.ReadInt32());
+                            amp3.Value = reader.ReadInt32();
+                            freq3.Value = reader.ReadInt32();
+                        }
+                    }
+                    RefreshLabels();
+                    GenerateWave();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong preset file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                presets.RemoveAt(presets_listBox.SelectedIndex);
+                if (presets.Count > 0)
+                    presets_listBox.SelectedIndex = 0;
+            }
+        }
+
+        // Disable listBox and domainUpDown 
+        // auto select item when pressing key
+        private void listbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+
+
         #endregion Event handlers
 
         #region Methods
@@ -338,6 +390,8 @@ namespace SoundGenerator
             {
                 if (arpFlag)
                     PlayArp();
+                else
+                    StopArp();
                 if (k == 0)
                     timer1.Enabled = false;
             }
@@ -429,6 +483,7 @@ namespace SoundGenerator
                     StopArp();
                     timer1.Enabled = true;
                     pictureBox1.Image = Properties.Resources._0;
+                    pressedKeys.Clear();
                 }
                 catch (NullReferenceException)
                 { }
@@ -447,21 +502,15 @@ namespace SoundGenerator
 
         private void GenerateWave()
         {
-            // Parsing WaveTypes
-            Enum.TryParse<Oscillator.WaveType>(comboBox1.SelectedValue.ToString(),
-                out w1);
-            Enum.TryParse<Oscillator.WaveType>(comboBox2.SelectedValue.ToString(),
-                out w2);
-            Enum.TryParse<Oscillator.WaveType>(comboBox3.SelectedValue.ToString(),
-                out w3);
+            w1 = (Oscillator.WaveType)comboBox1.SelectedItem;
+            w2 = (Oscillator.WaveType)comboBox2.SelectedItem;
+            w3 = (Oscillator.WaveType)comboBox3.SelectedItem;
 
             // Creating oscillators
-            osc1 = new Oscillator(w1, freq1.Value, amp1.Value);
-            osc2 = new Oscillator(w2, freq2.Value, amp2.Value);
-            osc3 = new Oscillator(w3, freq3.Value, amp3.Value);
+            oscs = new Oscillator[3] { new Oscillator(w1, freq1.Value, amp1.Value), new Oscillator(w2, freq2.Value, amp2.Value), new Oscillator(w3, freq3.Value, amp3.Value) };
 
             // Writing waveData to array of samples
-            waveData = Mixer.MixWaves(osc1, osc2, osc3);
+            waveData = Mixer.MixWaves(oscs);
 
             // Write to buffer
             buffer.Write(0, waveData, LockFlag.EntireBuffer);
@@ -478,6 +527,30 @@ namespace SoundGenerator
             //buffer.Write(0, waveData, LockFlag.EntireBuffer);
         }
 
-        #endregion Trash       
+
+
+
+        //---Serialization (not working properly)---//
+
+        //BinaryFormatter formatter = new BinaryFormatter();
+
+        //---Open---//
+        //oscs = (Oscillator[])formatter.Deserialize(stream);
+        //amp1.Value = oscs[0].Amplitude;
+        //amp2.Value = oscs[1].Amplitude;
+        //amp3.Value = oscs[2].Amplitude;
+        //freq1.Value = (int)oscs[0].Frequency;
+        //freq2.Value = (int)oscs[1].Frequency;
+        //freq3.Value = (int)oscs[2].Frequency;
+        //comboBox1.SelectedItem = oscs[0].Type;
+        //comboBox2.SelectedItem = oscs[1].Type;
+        //comboBox3.SelectedItem = oscs[2].Type;
+
+        //---Save---//
+        //formatter.Serialize(stream, oscs);
+
+        #endregion Trash
     }
 }
+
+

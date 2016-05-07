@@ -30,15 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.freq1 = new System.Windows.Forms.TrackBar();
             this.amp1 = new System.Windows.Forms.TrackBar();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,12 +53,9 @@
             this.freq3 = new System.Windows.Forms.TrackBar();
             this.amp3 = new System.Windows.Forms.TrackBar();
             this.graphButton = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -78,6 +74,8 @@
             this.distEdge = new System.Windows.Forms.TrackBar();
             this.recordButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.presets_listBox = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
@@ -98,9 +96,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -111,35 +106,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 141);
             this.panel1.TabIndex = 10;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(187, 13);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "label12";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(141, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(58, 69);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(68, 20);
-            this.textBox1.TabIndex = 21;
-            this.textBox1.Text = "440";
             // 
             // comboBox1
             // 
@@ -192,7 +158,6 @@
             this.freq1.TickFrequency = 148;
             this.freq1.Value = 20;
             this.freq1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.freq1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // amp1
             // 
@@ -205,7 +170,26 @@
             this.amp1.TabIndex = 1;
             this.amp1.TickFrequency = 3276;
             this.amp1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.amp1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(536, 277);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(462, 279);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(68, 20);
+            this.textBox1.TabIndex = 21;
+            this.textBox1.Text = "440";
             // 
             // panel2
             // 
@@ -271,7 +255,6 @@
             this.freq2.TickFrequency = 148;
             this.freq2.Value = 20;
             this.freq2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.freq2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // amp2
             // 
@@ -284,7 +267,6 @@
             this.amp2.TabIndex = 4;
             this.amp2.TickFrequency = 3276;
             this.amp2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.amp2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // panel3
             // 
@@ -350,7 +332,6 @@
             this.freq3.TickFrequency = 148;
             this.freq3.Value = 20;
             this.freq3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.freq3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // amp3
             // 
@@ -363,7 +344,6 @@
             this.amp3.TabIndex = 7;
             this.amp3.TickFrequency = 3276;
             this.amp3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.amp3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // graphButton
             // 
@@ -379,21 +359,11 @@
             this.graphButton.UseVisualStyleBackColor = false;
             this.graphButton.Click += new System.EventHandler(this.graphButton_Click);
             // 
-            // listBox1
-            // 
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(336, 175);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(122, 39);
-            this.listBox1.TabIndex = 22;
-            this.listBox1.TabStop = false;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(336, 220);
+            this.pictureBox1.Location = new System.Drawing.Point(462, 305);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(122, 80);
+            this.pictureBox1.Size = new System.Drawing.Size(181, 141);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
@@ -404,7 +374,7 @@
             this.saveButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Violet;
             this.saveButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(336, 306);
+            this.saveButton.Location = new System.Drawing.Point(336, 408);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(122, 38);
             this.saveButton.TabIndex = 10;
@@ -419,32 +389,14 @@
             this.openButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Violet;
             this.openButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumTurquoise;
             this.openButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openButton.Location = new System.Drawing.Point(336, 410);
+            this.openButton.Location = new System.Drawing.Point(336, 248);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(122, 38);
             this.openButton.TabIndex = 11;
             this.openButton.TabStop = false;
-            this.openButton.Text = "Open Preset";
+            this.openButton.Text = "Open Presets";
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(336, 350);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 13);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Current Preset:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(336, 373);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "-";
             // 
             // timer1
             // 
@@ -466,10 +418,10 @@
             this.domainUpDown1.TabStop = false;
             this.domainUpDown1.Text = "domainUpDown1";
             this.domainUpDown1.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
+            this.domainUpDown1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
             // timer2
             // 
-            this.timer2.Interval = 110;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // arp_checkBox
@@ -486,7 +438,8 @@
             // reverb_checkBox
             // 
             this.reverb_checkBox.AutoSize = true;
-            this.reverb_checkBox.Location = new System.Drawing.Point(336, 125);
+            this.reverb_checkBox.Enabled = false;
+            this.reverb_checkBox.Location = new System.Drawing.Point(580, 260);
             this.reverb_checkBox.Name = "reverb_checkBox";
             this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
             this.reverb_checkBox.TabIndex = 31;
@@ -497,7 +450,7 @@
             // dist_checkBox
             // 
             this.dist_checkBox.AutoSize = true;
-            this.dist_checkBox.Location = new System.Drawing.Point(336, 150);
+            this.dist_checkBox.Location = new System.Drawing.Point(464, 260);
             this.dist_checkBox.Name = "dist_checkBox";
             this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
             this.dist_checkBox.TabIndex = 32;
@@ -610,8 +563,9 @@
             // 
             // recordButton
             // 
+            this.recordButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.recordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.recordButton.Location = new System.Drawing.Point(467, 306);
+            this.recordButton.Location = new System.Drawing.Point(336, 204);
             this.recordButton.Name = "recordButton";
             this.recordButton.Size = new System.Drawing.Size(122, 38);
             this.recordButton.TabIndex = 45;
@@ -632,28 +586,48 @@
             this.panel4.Controls.Add(this.label16);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Enabled = false;
-            this.panel4.Location = new System.Drawing.Point(464, 12);
+            this.panel4.Location = new System.Drawing.Point(462, 12);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(179, 255);
+            this.panel4.Size = new System.Drawing.Size(179, 242);
             this.panel4.TabIndex = 46;
+            // 
+            // presets_listBox
+            // 
+            this.presets_listBox.FormattingEnabled = true;
+            this.presets_listBox.Location = new System.Drawing.Point(336, 305);
+            this.presets_listBox.Name = "presets_listBox";
+            this.presets_listBox.Size = new System.Drawing.Size(120, 95);
+            this.presets_listBox.TabIndex = 47;
+            this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
+            this.presets_listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(336, 289);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 13);
+            this.label10.TabIndex = 48;
+            this.label10.Text = "Presets";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 460);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.presets_listBox);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.recordButton);
             this.Controls.Add(this.dist_checkBox);
             this.Controls.Add(this.reverb_checkBox);
             this.Controls.Add(this.arp_checkBox);
             this.Controls.Add(this.domainUpDown1);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.graphButton);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -717,18 +691,14 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button openButton;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.CheckBox arp_checkBox;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox reverb_checkBox;
         private System.Windows.Forms.CheckBox dist_checkBox;
         private System.Windows.Forms.Label label13;
@@ -743,6 +713,8 @@
         private System.Windows.Forms.TrackBar distEdge;
         private System.Windows.Forms.Button recordButton;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ListBox presets_listBox;
+        private System.Windows.Forms.Label label10;
     }
 }
 
