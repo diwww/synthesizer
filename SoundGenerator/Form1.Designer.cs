@@ -158,7 +158,6 @@
             this.freq1.TickFrequency = 148;
             this.freq1.Value = 20;
             this.freq1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.freq1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // amp1
             // 
@@ -171,7 +170,6 @@
             this.amp1.TabIndex = 1;
             this.amp1.TickFrequency = 3276;
             this.amp1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.amp1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // button1
             // 
@@ -257,7 +255,6 @@
             this.freq2.TickFrequency = 148;
             this.freq2.Value = 20;
             this.freq2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.freq2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // amp2
             // 
@@ -270,7 +267,6 @@
             this.amp2.TabIndex = 4;
             this.amp2.TickFrequency = 3276;
             this.amp2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.amp2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // panel3
             // 
@@ -336,7 +332,6 @@
             this.freq3.TickFrequency = 148;
             this.freq3.Value = 20;
             this.freq3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.freq3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // amp3
             // 
@@ -349,7 +344,6 @@
             this.amp3.TabIndex = 7;
             this.amp3.TickFrequency = 3276;
             this.amp3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
-            this.amp3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.amp1_MouseUp);
             // 
             // graphButton
             // 

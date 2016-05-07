@@ -11,11 +11,11 @@ namespace SoundGenerator
 {
     public static class Methods
     {
-        public static SecondaryBuffer InitializeBuffer(IntPtr handle)
+        public static SecondaryBuffer InitializeBuffer(Form1 form)
         {
             // Buffer settings
             Device device = new Device();
-            device.SetCooperativeLevel(handle, CooperativeLevel.Normal);
+            device.SetCooperativeLevel(form, CooperativeLevel.Normal);
 
             // WAV format description
             WaveFormat waveFormat = new WaveFormat();

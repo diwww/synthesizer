@@ -27,20 +27,25 @@ namespace SoundGenerator
 
         // DirectSound variables
         public SecondaryBuffer buffer;
+
         // Flags
         public bool openFlag_gr = false;
         bool arpFlag = false;
         bool recordFlag = false;
+        
         // Additional forms
         Form2 f2;
+        
         // Сollections
         List<Keys> pressedKeys;
         Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
         BindingList<Preset> presets = new BindingList<Preset>();
+        
         // File dialogs
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         string path;
+
         WavFileRecorder recorder;
 
         #endregion Variables
@@ -75,7 +80,7 @@ namespace SoundGenerator
 
             try
             {
-                buffer = Methods.InitializeBuffer(this.Handle);
+                buffer = Methods.InitializeBuffer(this);
                 GenerateWave();
                 buffer.Volume = (int)Volume.Min;
                 buffer.Frequency = Methods.NoteFreq(8, 1);
@@ -190,6 +195,7 @@ namespace SoundGenerator
             {
                 timer1.Enabled = true;
             }
+
             k++;
         }
 
@@ -206,10 +212,6 @@ namespace SoundGenerator
         private void TrackBar_Scroll(object sender, EventArgs e)
         {
             RefreshLabels();
-        }
-
-        private void amp1_MouseUp(object sender, MouseEventArgs e)
-        {
             GenerateWave();
         }
 
