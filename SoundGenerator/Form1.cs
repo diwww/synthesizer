@@ -239,41 +239,15 @@ namespace SoundGenerator
             if (effects.Count > 0)
             {
                 buffer.SetEffects(effects.ToArray());
-
-                DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
-                EffectsDistortion settings = effect.AllParameters;
-
-                distEdge.Value = (int)settings.Edge;
-                distGain.Value = (int)settings.Gain;
-                distBand.Value = (int)settings.PostEqBandwidth;
-                distFreq.Value = (int)settings.PostEqCenterFrequency;
-                distCutoff.Value = (int)settings.PreLowpassCutoff;
-
-                panel4.Enabled = true;
             }
             else
             {
                 buffer.SetEffects(null);
-                panel4.Enabled = false;
             }
 
             buffer.Play(0, BufferPlayFlags.Looping);
         }
 
-        private void distFreq_Scroll(object sender, EventArgs e)
-        {
-            DistortionEffect effect = (DistortionEffect)buffer.GetEffects(0);
-
-            EffectsDistortion settings = effect.AllParameters;
-
-            settings.Edge = distEdge.Value;
-            settings.Gain = distGain.Value;
-            settings.PostEqBandwidth = distBand.Value;
-            settings.PostEqCenterFrequency = distFreq.Value;
-            settings.PreLowpassCutoff = distCutoff.Value;
-
-            effect.AllParameters = settings;
-        }
 
         private void recordButton_Click(object sender, EventArgs e)
         {
