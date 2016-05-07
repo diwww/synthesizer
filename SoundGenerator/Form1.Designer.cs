@@ -30,6 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.freq3 = new System.Windows.Forms.TrackBar();
+            this.amp3 = new System.Windows.Forms.TrackBar();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.freq2 = new System.Windows.Forms.TrackBar();
+            this.amp2 = new System.Windows.Forms.TrackBar();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,27 +64,15 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.freq2 = new System.Windows.Forms.TrackBar();
-            this.amp2 = new System.Windows.Forms.TrackBar();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.freq3 = new System.Windows.Forms.TrackBar();
-            this.amp3 = new System.Windows.Forms.TrackBar();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.freq3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amp3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.freq2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amp2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.freq2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.amp2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.freq3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.amp3)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -99,6 +99,134 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 436);
             this.panel1.TabIndex = 10;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(49, 291);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 26;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(243, 379);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "Frequency";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(243, 323);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Amplitude";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(11, 294);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 29;
+            this.label9.Text = "Osc3";
+            // 
+            // freq3
+            // 
+            this.freq3.LargeChange = 296;
+            this.freq3.Location = new System.Drawing.Point(11, 379);
+            this.freq3.Maximum = 1500;
+            this.freq3.Minimum = 20;
+            this.freq3.Name = "freq3";
+            this.freq3.Size = new System.Drawing.Size(226, 45);
+            this.freq3.SmallChange = 148;
+            this.freq3.TabIndex = 28;
+            this.freq3.TickFrequency = 148;
+            this.freq3.Value = 20;
+            this.freq3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
+            // 
+            // amp3
+            // 
+            this.amp3.LargeChange = 6552;
+            this.amp3.Location = new System.Drawing.Point(11, 323);
+            this.amp3.Maximum = 32760;
+            this.amp3.Name = "amp3";
+            this.amp3.Size = new System.Drawing.Size(226, 45);
+            this.amp3.SmallChange = 3276;
+            this.amp3.TabIndex = 27;
+            this.amp3.TickFrequency = 3276;
+            this.amp3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(49, 147);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 20;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(243, 235);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Frequency";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(243, 179);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Amplitude";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 150);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Osc2";
+            // 
+            // freq2
+            // 
+            this.freq2.LargeChange = 296;
+            this.freq2.Location = new System.Drawing.Point(11, 235);
+            this.freq2.Maximum = 1500;
+            this.freq2.Minimum = 20;
+            this.freq2.Name = "freq2";
+            this.freq2.Size = new System.Drawing.Size(226, 45);
+            this.freq2.SmallChange = 148;
+            this.freq2.TabIndex = 22;
+            this.freq2.TickFrequency = 148;
+            this.freq2.Value = 20;
+            this.freq2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
+            // 
+            // amp2
+            // 
+            this.amp2.LargeChange = 6552;
+            this.amp2.Location = new System.Drawing.Point(11, 179);
+            this.amp2.Maximum = 32760;
+            this.amp2.Name = "amp2";
+            this.amp2.Size = new System.Drawing.Size(226, 45);
+            this.amp2.SmallChange = 3276;
+            this.amp2.TabIndex = 21;
+            this.amp2.TickFrequency = 3276;
+            this.amp2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
             // 
             // comboBox1
             // 
@@ -345,128 +473,6 @@
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(49, 147);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 20;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(243, 235);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Frequency";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(243, 179);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Amplitude";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 150);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Osc2";
-            // 
-            // freq2
-            // 
-            this.freq2.LargeChange = 296;
-            this.freq2.Location = new System.Drawing.Point(11, 235);
-            this.freq2.Maximum = 1500;
-            this.freq2.Minimum = 20;
-            this.freq2.Name = "freq2";
-            this.freq2.Size = new System.Drawing.Size(226, 45);
-            this.freq2.SmallChange = 148;
-            this.freq2.TabIndex = 22;
-            this.freq2.TickFrequency = 148;
-            this.freq2.Value = 20;
-            // 
-            // amp2
-            // 
-            this.amp2.LargeChange = 6552;
-            this.amp2.Location = new System.Drawing.Point(11, 179);
-            this.amp2.Maximum = 32760;
-            this.amp2.Name = "amp2";
-            this.amp2.Size = new System.Drawing.Size(226, 45);
-            this.amp2.SmallChange = 3276;
-            this.amp2.TabIndex = 21;
-            this.amp2.TickFrequency = 3276;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(49, 291);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 26;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(243, 379);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 13);
-            this.label7.TabIndex = 31;
-            this.label7.Text = "Frequency";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(243, 323);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "Amplitude";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 294);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(32, 13);
-            this.label9.TabIndex = 29;
-            this.label9.Text = "Osc3";
-            // 
-            // freq3
-            // 
-            this.freq3.LargeChange = 296;
-            this.freq3.Location = new System.Drawing.Point(11, 379);
-            this.freq3.Maximum = 1500;
-            this.freq3.Minimum = 20;
-            this.freq3.Name = "freq3";
-            this.freq3.Size = new System.Drawing.Size(226, 45);
-            this.freq3.SmallChange = 148;
-            this.freq3.TabIndex = 28;
-            this.freq3.TickFrequency = 148;
-            this.freq3.Value = 20;
-            // 
-            // amp3
-            // 
-            this.amp3.LargeChange = 6552;
-            this.amp3.Location = new System.Drawing.Point(11, 323);
-            this.amp3.Maximum = 32760;
-            this.amp3.Name = "amp3";
-            this.amp3.Size = new System.Drawing.Size(226, 45);
-            this.amp3.SmallChange = 3276;
-            this.amp3.TabIndex = 27;
-            this.amp3.TickFrequency = 3276;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,15 +492,15 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.freq3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amp3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.freq2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amp2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.freq2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.amp2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.freq3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.amp3)).EndInit();
             this.ResumeLayout(false);
 
         }
