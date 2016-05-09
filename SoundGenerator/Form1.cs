@@ -176,7 +176,14 @@ namespace SoundGenerator
         {
             if (buffer.Volume != -10000)
             {
-                buffer.Volume -= 100;
+                if (arpFlag)
+                {
+                    buffer.Volume -= 200;
+                }
+                else
+                {
+                    buffer.Volume -= 100;
+                }
             }
             else
             {
@@ -217,6 +224,7 @@ namespace SoundGenerator
 
         private void arp_checkBox_CheckedChanged(object sender, EventArgs e)
         {
+            buffer.Volume = (int)Volume.Min;
             arpFlag = arp_checkBox.Checked;
         }
 
