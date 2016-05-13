@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -77,6 +78,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.comboBox3);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label8);
@@ -99,6 +101,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 436);
             this.panel1.TabIndex = 10;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(200, 132);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "label11";
             // 
             // comboBox3
             // 
@@ -434,7 +445,6 @@
             this.presets_listBox.Size = new System.Drawing.Size(120, 95);
             this.presets_listBox.TabIndex = 47;
             this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
-            this.presets_listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
             // label10
             // 
@@ -542,6 +552,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar freq2;
         private System.Windows.Forms.TrackBar amp2;
+        private System.Windows.Forms.Label label11;
     }
 }
 

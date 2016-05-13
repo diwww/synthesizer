@@ -54,22 +54,11 @@ namespace SoundGenerator
             chart1.Series["WAVE"].IsVisibleInLegend = false;
             chart1.Series["WAVE"].BorderWidth = 2;
 
-            chart1.Series.Add("WAVE1");
-            chart1.Series["WAVE1"].ChartType = SeriesChartType.Line;
-            chart1.Series["WAVE1"].Color = Color.Red;
-            chart1.Series["WAVE1"].IsVisibleInLegend = false;
-            chart1.Series["WAVE1"].BorderWidth = 2;
-
-            //for (int i = 43900; i < 44099; i++)
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 2000; i++)
             {
                 DataPoint dp = new DataPoint();
-                dp.SetValueXY(i, mainForm.filteredData[i]);
+                dp.SetValueXY(i, mainForm.waveData[i]);
                 chart1.Series["WAVE"].Points.Add(dp);
-
-                DataPoint dp1 = new DataPoint();
-                dp1.SetValueXY(i, mainForm.waveData[i]);
-                chart1.Series["WAVE1"].Points.Add(dp1);
             }
         }
     }

@@ -176,14 +176,10 @@ namespace SoundGenerator
         {
             if (buffer.Volume != -10000)
             {
-                if (arpFlag)
-                {
-                    buffer.Volume -= 200;
-                }
-                else
-                {
-                    buffer.Volume -= 100;
-                }
+                //if (arpFlag)
+                //    buffer.Volume -= 250;
+                //else
+                buffer.Volume -= 100;
             }
             else
             {
@@ -204,6 +200,9 @@ namespace SoundGenerator
             }
 
             k++;
+
+            label11.Text = k.ToString();
+
         }
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
@@ -224,7 +223,6 @@ namespace SoundGenerator
 
         private void arp_checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            buffer.Volume = (int)Volume.Min;
             arpFlag = arp_checkBox.Checked;
         }
 
