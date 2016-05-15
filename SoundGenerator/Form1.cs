@@ -329,6 +329,12 @@ namespace SoundGenerator
             e.SuppressKeyPress = true;
         }
 
+        private void filter_trackBar_Scroll(object sender, EventArgs e)
+        {
+            short[] filteredData = Filter.LowPass(waveData, filter_trackBar.Value);
+            label14.Text = "Cutoff\n" + filter_trackBar.Value.ToString() + "Hz";
+            buffer.Write(0, filteredData, LockFlag.EntireBuffer);
+        }
 
         #endregion Event handlers
 
@@ -494,28 +500,14 @@ namespace SoundGenerator
 
             // Write to buffer
             buffer.Write(0, waveData, LockFlag.EntireBuffer);
+
+            filter_trackBar.Value = 2500;
+            label14.Text = "Cutoff\n" + filter_trackBar.Value.ToString() + "Hz";
         }
 
         #endregion Methods
 
         #region Trash
-
-        public short[] filteredData;
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int cutoff = Convert.ToInt32(textBox1.Text);
-            filteredData = Filter.LowPass(waveData, cutoff);
-            buffer.Write(0, filteredData, LockFlag.EntireBuffer);
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
 
         //---Serialization (not working properly)---//
 
