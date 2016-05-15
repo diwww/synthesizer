@@ -189,5 +189,20 @@ namespace SoundGenerator.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///  &lt;startup useLegacyV2RuntimeActivationPolicy=&quot;true&quot;&gt;
+        ///    
+        ///  &lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.0&quot;/&gt;&lt;/startup&gt;
+        ///&lt;/configuration&gt;
+        ///.
+        /// </summary>
+        internal static string App {
+            get {
+                return ResourceManager.GetString("App", resourceCulture);
+            }
+        }
     }
 }
