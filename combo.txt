@@ -6,3 +6,4 @@ t q 3 t 3 q //t e r
 t q 3 r
 w r q
 y e r w
+r t |e w |q w

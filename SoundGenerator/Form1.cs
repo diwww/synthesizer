@@ -6,11 +6,6 @@ using Synthesizer;
 using Microsoft.DirectX.DirectSound;
 using System.Drawing;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Serialization;
-
-// TODO: Когда листаешь листбокс колесиком мыши, отключается арпеджиатор
-// TODO: Автоматическая загрузка пресета, когда удален первый
 
 namespace SoundGenerator
 {
@@ -21,9 +16,10 @@ namespace SoundGenerator
         // Oscillator and Mixer variables
         Oscillator.WaveType w1, w2, w3;
         Oscillator[] oscs;
-        public short[] waveData;
+        public short[] waveData, filteredData;
         int octave;
         int k = 0; // Arpeggiator status
+        int delta = 500; // How fast volume decreases
 
         // DirectSound variables
         public SecondaryBuffer buffer;
@@ -55,7 +51,6 @@ namespace SoundGenerator
         private void Form1_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-            sfd.Filter = ofd.Filter = "Synth presets|*.sp";
             ofd.Multiselect = true;
             presets_listBox.DataSource = presets;
             presets_listBox.ValueMember = "FullName";
@@ -116,6 +111,17 @@ namespace SoundGenerator
             }
             catch (NullReferenceException)
             { }
+
+            if (e.KeyData == Keys.Up && presets_listBox.SelectedIndex > 0)
+            {
+                presets_listBox.Select();
+                presets_listBox.SelectedIndex--;
+            }
+            if (e.KeyData == Keys.Down && presets_listBox.SelectedIndex < presets_listBox.Items.Count - 1)
+            {
+                presets_listBox.Select();
+                presets_listBox.SelectedIndex++;
+            }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -125,6 +131,8 @@ namespace SoundGenerator
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            sfd.Filter = "Synth presets|*.sp";
+
             if (sfd.ShowDialog() != DialogResult.OK)
                 return;
             else
@@ -159,6 +167,8 @@ namespace SoundGenerator
 
         private void openButton_Click(object sender, EventArgs e)
         {
+            ofd.Filter = "Synth presets|*.sp";
+
             if (ofd.ShowDialog() != DialogResult.OK)
                 return;
             else
@@ -176,10 +186,15 @@ namespace SoundGenerator
         {
             if (buffer.Volume != -10000)
             {
-                //if (arpFlag)
-                //    buffer.Volume -= 250;
-                //else
-                buffer.Volume -= 100;
+                try
+                {
+                    buffer.Volume -= delta;
+                }
+                catch (ArgumentException)
+                {
+                    buffer.Volume = -10000;
+                    timer1.Enabled = false;
+                }
             }
             else
             {
@@ -191,8 +206,8 @@ namespace SoundGenerator
         {
             if (k % 2 == 1)
             {
-                buffer.Volume = (int)Volume.Max;
                 timer1.Enabled = false;
+                buffer.Volume = (int)Volume.Max;
             }
             else
             {
@@ -200,9 +215,6 @@ namespace SoundGenerator
             }
 
             k++;
-
-            label11.Text = k.ToString();
-
         }
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
@@ -224,6 +236,16 @@ namespace SoundGenerator
         private void arp_checkBox_CheckedChanged(object sender, EventArgs e)
         {
             arpFlag = arp_checkBox.Checked;
+            //if (arpFlag)
+            //{
+            //    timer1.Interval = 50;
+            //    delta = 500;
+            //}
+            //else
+            //{
+            //    timer1.Interval = 10;
+            //    delta = 100;
+            //}
         }
 
         private void effects_CheckedChanged(object sender, EventArgs e)
@@ -254,22 +276,28 @@ namespace SoundGenerator
             buffer.Play(0, BufferPlayFlags.Looping);
         }
 
-
         private void recordButton_Click(object sender, EventArgs e)
         {
             if (recordFlag == false)
             {
-                try
+                sfd.Filter = "WAV files|*.wav";
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+                else
                 {
-                    recorder = new WavFileRecorder("new.wav");
-                    recorder.StartRecord();
-                    recordFlag = true;
-                    recordButton.Text = "Recording/Stop";
-                    recordButton.BackColor = Color.Red;
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        path = @sfd.FileName;
+                        recorder = new WavFileRecorder(path);
+                        recorder.StartRecord();
+                        recordFlag = true;
+                        recordButton.Text = "Recording/Stop";
+                        recordButton.BackColor = Color.Red;
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show(exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
@@ -322,8 +350,8 @@ namespace SoundGenerator
             }
         }
 
-        // Disable listBox and domainUpDown 
-        // auto select item when pressing key
+        // Disable controls auto selecting
+        // items when pressing key
         private void listbox_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = true;
@@ -331,9 +359,32 @@ namespace SoundGenerator
 
         private void filter_trackBar_Scroll(object sender, EventArgs e)
         {
-            short[] filteredData = Filter.LowPass(waveData, filter_trackBar.Value);
             label14.Text = "Cutoff\n" + filter_trackBar.Value.ToString() + "Hz";
-            buffer.Write(0, filteredData, LockFlag.EntireBuffer);
+
+            if (filter_trackBar.Value < 2500)
+            {
+                filteredData = Filter.LowPass(waveData, filter_trackBar.Value);
+                buffer.Write(0, filteredData, LockFlag.EntireBuffer);
+            }
+            else
+            {
+                filteredData = null;
+                buffer.Write(0, waveData, LockFlag.EntireBuffer);
+                label14.Text = "Off";
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (recorder != null)
+            {
+                recorder.StopRecord();
+                recorder.Dispose();
+                recorder = null;
+                recordFlag = false;
+                recordButton.Text = "Start Record";
+                recordButton.BackColor = SystemColors.Control;
+            }
         }
 
         #endregion Event handlers
@@ -502,7 +553,6 @@ namespace SoundGenerator
             buffer.Write(0, waveData, LockFlag.EntireBuffer);
 
             filter_trackBar.Value = 2500;
-            label14.Text = "Cutoff\n" + filter_trackBar.Value.ToString() + "Hz";
         }
 
         #endregion Methods

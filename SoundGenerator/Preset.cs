@@ -12,8 +12,6 @@ namespace SoundGenerator
         public string Name { get; private set; }
         public string FullName { get; private set; }
 
-        // TODO: Добавить проверку корректности файла
-
         public Preset(string path)
         {
             FullName = path;

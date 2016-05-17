@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -81,7 +80,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.comboBox3);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label8);
@@ -105,15 +103,6 @@
             this.panel1.Size = new System.Drawing.Size(318, 436);
             this.panel1.TabIndex = 10;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(200, 132);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 13);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "label11";
-            // 
             // comboBox3
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -123,6 +112,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 26;
+            this.comboBox3.TabStop = false;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
@@ -163,6 +153,7 @@
             this.freq3.Size = new System.Drawing.Size(226, 45);
             this.freq3.SmallChange = 148;
             this.freq3.TabIndex = 28;
+            this.freq3.TabStop = false;
             this.freq3.TickFrequency = 148;
             this.freq3.Value = 20;
             this.freq3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
@@ -176,6 +167,7 @@
             this.amp3.Size = new System.Drawing.Size(226, 45);
             this.amp3.SmallChange = 3276;
             this.amp3.TabIndex = 27;
+            this.amp3.TabStop = false;
             this.amp3.TickFrequency = 3276;
             this.amp3.Scroll += new System.EventHandler(this.TrackBar_Scroll);
             // 
@@ -188,6 +180,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 20;
+            this.comboBox2.TabStop = false;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
@@ -228,6 +221,7 @@
             this.freq2.Size = new System.Drawing.Size(226, 45);
             this.freq2.SmallChange = 148;
             this.freq2.TabIndex = 22;
+            this.freq2.TabStop = false;
             this.freq2.TickFrequency = 148;
             this.freq2.Value = 20;
             this.freq2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
@@ -241,6 +235,7 @@
             this.amp2.Size = new System.Drawing.Size(226, 45);
             this.amp2.SmallChange = 3276;
             this.amp2.TabIndex = 21;
+            this.amp2.TabStop = false;
             this.amp2.TickFrequency = 3276;
             this.amp2.Scroll += new System.EventHandler(this.TrackBar_Scroll);
             // 
@@ -253,6 +248,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.TabStop = false;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
@@ -293,6 +289,7 @@
             this.freq1.Size = new System.Drawing.Size(226, 45);
             this.freq1.SmallChange = 148;
             this.freq1.TabIndex = 2;
+            this.freq1.TabStop = false;
             this.freq1.TickFrequency = 148;
             this.freq1.Value = 20;
             this.freq1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
@@ -306,6 +303,7 @@
             this.amp1.Size = new System.Drawing.Size(226, 45);
             this.amp1.SmallChange = 3276;
             this.amp1.TabIndex = 1;
+            this.amp1.TabStop = false;
             this.amp1.TickFrequency = 3276;
             this.amp1.Scroll += new System.EventHandler(this.TrackBar_Scroll);
             // 
@@ -319,6 +317,7 @@
             this.graphButton.Name = "graphButton";
             this.graphButton.Size = new System.Drawing.Size(122, 74);
             this.graphButton.TabIndex = 9;
+            this.graphButton.TabStop = false;
             this.graphButton.Text = "Show Graph";
             this.graphButton.UseVisualStyleBackColor = false;
             this.graphButton.Click += new System.EventHandler(this.graphButton_Click);
@@ -355,7 +354,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 10;
+            this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // domainUpDown1
@@ -386,6 +385,7 @@
             this.arp_checkBox.Name = "arp_checkBox";
             this.arp_checkBox.Size = new System.Drawing.Size(80, 17);
             this.arp_checkBox.TabIndex = 30;
+            this.arp_checkBox.TabStop = false;
             this.arp_checkBox.Text = "Arpeggiator";
             this.arp_checkBox.UseVisualStyleBackColor = true;
             this.arp_checkBox.CheckedChanged += new System.EventHandler(this.arp_checkBox_CheckedChanged);
@@ -397,6 +397,7 @@
             this.reverb_checkBox.Name = "reverb_checkBox";
             this.reverb_checkBox.Size = new System.Drawing.Size(61, 17);
             this.reverb_checkBox.TabIndex = 31;
+            this.reverb_checkBox.TabStop = false;
             this.reverb_checkBox.Text = "Reverb";
             this.reverb_checkBox.UseVisualStyleBackColor = true;
             this.reverb_checkBox.CheckedChanged += new System.EventHandler(this.effects_CheckedChanged);
@@ -408,6 +409,7 @@
             this.dist_checkBox.Name = "dist_checkBox";
             this.dist_checkBox.Size = new System.Drawing.Size(70, 17);
             this.dist_checkBox.TabIndex = 32;
+            this.dist_checkBox.TabStop = false;
             this.dist_checkBox.Text = "Distortion";
             this.dist_checkBox.UseVisualStyleBackColor = true;
             this.dist_checkBox.CheckedChanged += new System.EventHandler(this.effects_CheckedChanged);
@@ -420,6 +422,7 @@
             this.recordButton.Name = "recordButton";
             this.recordButton.Size = new System.Drawing.Size(122, 38);
             this.recordButton.TabIndex = 45;
+            this.recordButton.TabStop = false;
             this.recordButton.Text = "Start Record";
             this.recordButton.UseVisualStyleBackColor = true;
             this.recordButton.Click += new System.EventHandler(this.recordButton_Click);
@@ -431,7 +434,9 @@
             this.presets_listBox.Name = "presets_listBox";
             this.presets_listBox.Size = new System.Drawing.Size(120, 95);
             this.presets_listBox.TabIndex = 47;
+            this.presets_listBox.TabStop = false;
             this.presets_listBox.SelectedIndexChanged += new System.EventHandler(this.presets_listBox_SelectedIndexChanged);
+            this.presets_listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listbox_KeyDown);
             // 
             // label10
             // 
@@ -484,6 +489,7 @@
             this.filter_trackBar.Name = "filter_trackBar";
             this.filter_trackBar.Size = new System.Drawing.Size(104, 45);
             this.filter_trackBar.TabIndex = 49;
+            this.filter_trackBar.TabStop = false;
             this.filter_trackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.filter_trackBar.Value = 2500;
             this.filter_trackBar.Scroll += new System.EventHandler(this.filter_trackBar_Scroll);
@@ -502,9 +508,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(605, 418);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(44, 26);
+            this.label14.Size = new System.Drawing.Size(21, 13);
             this.label14.TabIndex = 52;
-            this.label14.Text = "Cutoff\r\n2500Hz";
+            this.label14.Text = "Off";
             // 
             // Form1
             // 
@@ -525,6 +531,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SoundGenerator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
@@ -580,7 +587,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar freq2;
         private System.Windows.Forms.TrackBar amp2;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TrackBar filter_trackBar;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
