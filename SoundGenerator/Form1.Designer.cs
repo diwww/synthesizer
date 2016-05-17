@@ -60,7 +60,7 @@
             this.recordButton = new System.Windows.Forms.Button();
             this.presets_listBox = new System.Windows.Forms.ListBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.filter_trackBar = new System.Windows.Forms.TrackBar();
@@ -73,7 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.amp2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).BeginInit();
-            this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filter_trackBar)).BeginInit();
             this.SuspendLayout();
@@ -447,21 +447,21 @@
             this.label10.TabIndex = 48;
             this.label10.Text = "Presets";
             // 
-            // panel4
+            // panel2
             // 
-            this.panel4.Controls.Add(this.recordButton);
-            this.panel4.Controls.Add(this.graphButton);
-            this.panel4.Controls.Add(this.saveButton);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.openButton);
-            this.panel4.Controls.Add(this.presets_listBox);
-            this.panel4.Controls.Add(this.dist_checkBox);
-            this.panel4.Controls.Add(this.reverb_checkBox);
-            this.panel4.Controls.Add(this.arp_checkBox);
-            this.panel4.Location = new System.Drawing.Point(336, 12);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(152, 436);
-            this.panel4.TabIndex = 49;
+            this.panel2.Controls.Add(this.recordButton);
+            this.panel2.Controls.Add(this.graphButton);
+            this.panel2.Controls.Add(this.saveButton);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.openButton);
+            this.panel2.Controls.Add(this.presets_listBox);
+            this.panel2.Controls.Add(this.dist_checkBox);
+            this.panel2.Controls.Add(this.reverb_checkBox);
+            this.panel2.Controls.Add(this.arp_checkBox);
+            this.panel2.Location = new System.Drawing.Point(336, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(152, 436);
+            this.panel2.TabIndex = 49;
             // 
             // pictureBox1
             // 
@@ -521,7 +521,7 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.filter_trackBar);
-            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.domainUpDown1);
@@ -543,8 +543,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.amp2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amp1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filter_trackBar)).EndInit();
             this.ResumeLayout(false);
@@ -574,7 +574,7 @@
         private System.Windows.Forms.Button recordButton;
         private System.Windows.Forms.ListBox presets_listBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;

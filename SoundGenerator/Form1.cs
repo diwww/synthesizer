@@ -112,14 +112,12 @@ namespace SoundGenerator
             catch (NullReferenceException)
             { }
 
-            if (e.KeyData == Keys.Up && presets_listBox.SelectedIndex > 0)
+            if (e.KeyData == Keys.OemOpenBrackets && presets_listBox.SelectedIndex > 0)
             {
-                presets_listBox.Select();
                 presets_listBox.SelectedIndex--;
             }
-            if (e.KeyData == Keys.Down && presets_listBox.SelectedIndex < presets_listBox.Items.Count - 1)
+            if (e.KeyData == Keys.OemCloseBrackets && presets_listBox.SelectedIndex < presets_listBox.Items.Count - 1)
             {
-                presets_listBox.Select();
                 presets_listBox.SelectedIndex++;
             }
         }
@@ -179,6 +177,7 @@ namespace SoundGenerator
                     presets.Add(new Preset(name));
                 }
                 presets_listBox_SelectedIndexChanged(this, e);
+                presets_listBox.Select();
             }
         }
 
