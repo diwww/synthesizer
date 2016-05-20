@@ -552,6 +552,7 @@ namespace SoundGenerator
             buffer.Write(0, waveData, LockFlag.EntireBuffer);
 
             filter_trackBar.Value = 2500;
+            label14.Text = "Off";
         }
 
         #endregion Methods
