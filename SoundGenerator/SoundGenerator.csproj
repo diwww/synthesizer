@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons8-Windows-8-Music-Audio-Wave.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSCore">
       <HintPath>..\CSCore.dll</HintPath>
@@ -156,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons8-Windows-8-Music-Audio-Wave.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

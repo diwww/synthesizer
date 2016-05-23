@@ -8,8 +8,6 @@ namespace SoundGenerator
     {
         Form1 mainForm;
 
-        // TODO : dock = fill не рефрешит чарт
-
         public Form2()
         {
             InitializeComponent();

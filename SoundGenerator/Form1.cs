@@ -360,7 +360,7 @@ namespace SoundGenerator
         {
             label14.Text = "Cutoff\n" + filter_trackBar.Value.ToString() + "Hz";
 
-            if (filter_trackBar.Value < 2500)
+            if (filter_trackBar.Value < 1000)
             {
                 filteredData = Filter.LowPass(waveData, filter_trackBar.Value);
                 buffer.Write(0, filteredData, LockFlag.EntireBuffer);
@@ -551,7 +551,7 @@ namespace SoundGenerator
             // Write to buffer
             buffer.Write(0, waveData, LockFlag.EntireBuffer);
 
-            filter_trackBar.Value = 2500;
+            filter_trackBar.Value = 1000;
             label14.Text = "Off";
         }
 

@@ -15,13 +15,6 @@ namespace SoundGenerator
         [STAThread]
         static void Main()
         {
-            //using (FileStream stream = new FileStream("SoundGenerator.exe.config", FileMode.Create))
-            //{
-            //    using (StreamWriter writer = new StreamWriter(stream))
-            //    {
-            //        writer.WriteLine(Properties.Resources.App);
-            //    }
-            //}
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
