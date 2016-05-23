@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -484,14 +485,14 @@
             // filter_trackBar
             // 
             this.filter_trackBar.Location = new System.Drawing.Point(494, 403);
-            this.filter_trackBar.Maximum = 2500;
-            this.filter_trackBar.Minimum = 100;
+            this.filter_trackBar.Maximum = 1000;
+            this.filter_trackBar.Minimum = 20;
             this.filter_trackBar.Name = "filter_trackBar";
             this.filter_trackBar.Size = new System.Drawing.Size(104, 45);
             this.filter_trackBar.TabIndex = 49;
             this.filter_trackBar.TabStop = false;
             this.filter_trackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.filter_trackBar.Value = 2500;
+            this.filter_trackBar.Value = 1000;
             this.filter_trackBar.Scroll += new System.EventHandler(this.filter_trackBar_Scroll);
             // 
             // label13
@@ -527,6 +528,7 @@
             this.Controls.Add(this.domainUpDown1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
