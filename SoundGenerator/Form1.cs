@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.IO;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Synthesizer;
@@ -33,7 +34,7 @@ namespace SoundGenerator
         Form2 f2;
 
         // Сollections
-        List<Keys> pressedKeys;
+        HashSet<Keys> pressedKeys;
         Keys[] synthKeys = { Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7 };
         BindingList<Preset> presets = new BindingList<Preset>();
 
@@ -59,7 +60,7 @@ namespace SoundGenerator
 
             // Initialize list for pressed keys
             Array.Sort<Keys>(synthKeys);
-            pressedKeys = new List<Keys>();
+            pressedKeys = new HashSet<Keys>();
 
             // Octave selection
             domainUpDown1.SelectedIndex = 2;
@@ -402,16 +403,7 @@ namespace SoundGenerator
         // if pressedKeys.Count > 0
         private void AddKeys(KeyEventArgs e)
         {
-            bool f = true;
-            for (int i = 0; i < pressedKeys.Count; i++)
-            {
-                if (e.KeyData == pressedKeys[i])
-                {
-                    f = false;
-                    break;
-                }
-            }
-            if (f && (Array.BinarySearch<Keys>(synthKeys, e.KeyData) >= 0))
+            if (synthKeys.Contains(e.KeyData))
             {
                 pressedKeys.Add(e.KeyData);
                 if (k == 0)
@@ -503,13 +495,8 @@ namespace SoundGenerator
         private void StopPlayback(KeyEventArgs e)
         {
             // Remove released keys from list
-            for (int i = 0; i < pressedKeys.Count; i++)
-            {
-                if (pressedKeys[i] == e.KeyData)
-                {
-                    pressedKeys.RemoveAt(i);
-                }
-            }
+            pressedKeys.Remove(e.KeyData);
+
             // if no keys pressed,
             // stop playback
             if (pressedKeys.Count < 1)
@@ -556,30 +543,5 @@ namespace SoundGenerator
         }
 
         #endregion Methods
-
-        #region Trash
-
-        //---Serialization (not working properly)---//
-
-        //BinaryFormatter formatter = new BinaryFormatter();
-
-        //---Open---//
-        //oscs = (Oscillator[])formatter.Deserialize(stream);
-        //amp1.Value = oscs[0].Amplitude;
-        //amp2.Value = oscs[1].Amplitude;
-        //amp3.Value = oscs[2].Amplitude;
-        //freq1.Value = (int)oscs[0].Frequency;
-        //freq2.Value = (int)oscs[1].Frequency;
-        //freq3.Value = (int)oscs[2].Frequency;
-        //comboBox1.SelectedItem = oscs[0].Type;
-        //comboBox2.SelectedItem = oscs[1].Type;
-        //comboBox3.SelectedItem = oscs[2].Type;
-
-        //---Save---//
-        //formatter.Serialize(stream, oscs);
-
-        #endregion Trash
     }
 }
-
-
